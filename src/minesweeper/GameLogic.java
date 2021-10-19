@@ -2,8 +2,8 @@ package minesweeper;
 
 public class GameLogic {
     Grid g;
-    int width = 100;
-    int height = 100;
+    int width = 85;
+    int height = 85;
     int bombs = 0;
     int anyadseszeret = width * height - bombs;
 
