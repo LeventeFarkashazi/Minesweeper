@@ -5,19 +5,16 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
-        GameLogic gl = new GameLogic();
-        Graphic g = new Graphic();
-        gl.initGame();
-        gl.startGame();
-        g.displayMenu();
+        GameLogic game = new GameLogic();
+        game.initGame();
+        game.startGame();
 
-
-        while (!gl.isExploded()){
-            System.out.print("fuggoleges vizszintes:");
+        while (!game.isExploded()){
+            System.out.print("fuggőleges vízszintes:");
             int x = scan.nextInt();
             int y = scan.nextInt();
-            gl.clickTile( x, y);
+            game.clickTile( x, y);
         }
-        gl.endGame();
+        game.endGame();
     }
 }

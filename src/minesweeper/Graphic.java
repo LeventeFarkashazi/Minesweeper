@@ -1,19 +1,37 @@
 package minesweeper;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class Graphic {
-    JFrame f = new JFrame("Űber epikus minesweeper");
-    JPanel p = new JPanel();
-    JButton b = new JButton("Explode");
-    JTextField t = new JTextField("Type here!");
+    Grid grid;
+    JFrame frame = new JFrame("Epic minesweeper");
+    JPanel menu_panel = new JPanel();
+    JPanel game_panel = new JPanel();
 
-    public void displayMenu() {
-        p.add(b);
-        f.add(p, BorderLayout.NORTH);
-        f.pack();
-        f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
-        f.setVisible(true);
+    Graphic(Grid grid){
+        this.grid=grid;
     }
+
+    public void initDisplay() {
+        game_panel.setLayout(new GridLayout(grid.getHeight(), grid.getWidth()));
+        frame.add(menu_panel, BorderLayout.NORTH);
+        frame.add(game_panel, BorderLayout.CENTER);
+        //game_panel.setBorder(new EmptyBorder(15, 15, 15, 15));
+        Dimension dim = new Dimension(20,20);
+        for(int x = 0; x < grid.getHeight(); x++ ) {
+            for( int y = 0; y < grid.getWidth(); y++ ) {
+                JButton tmp = new JButton();
+                tmp.setPreferredSize(new Dimension(dim));
+
+                game_panel.add(tmp);
+            }
+        }
+
+        frame.pack();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+
 }

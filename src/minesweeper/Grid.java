@@ -3,10 +3,10 @@ package minesweeper;
 import java.util.Random;
 
 public class Grid {
-    int width;
-    int height;
-    Tile[][] grid;
-    boolean exploded;
+    private int width;
+    private int height;
+    private Tile[][] grid;
+    private boolean exploded;
 
     Grid(int width, int height){
         this.width = width;
@@ -16,20 +16,24 @@ public class Grid {
         init();
     }
 
+    //init the matrix:
     public void init(){
         for(int x = 0; x < width; x++ )
         {
             for( int y = 0; y < height; y++ )
             {
-                grid[x][y] = new Tile(x,y,false,false,0);
+                grid[x][y] = new Tile(false,false,0);
             }
         }
     }
 
-    public boolean isExploded() {
-        return exploded;
+    //check if a tile is in the grid:
+    public boolean inGrid(int x, int y){
+        return x <= width - 1 && x >= 0 && y <= height - 1 && y >= 0;
     }
 
+
+    //chose bombs radnomly:
     public void putBombs(int bombs){
         Random rn = new Random();
         int x;
@@ -47,10 +51,7 @@ public class Grid {
         }
     }
 
-    public boolean inGrid(int x, int y){
-        return x <= width - 1 && x >= 0 && y <= height - 1 && y >= 0;
-    }
-
+    //calculate tile's number:
     public void checkNeighbours(){
         for(int x = 0; x < width; x++ )
         {
@@ -70,6 +71,7 @@ public class Grid {
         }
     }
 
+    //print out the grid. should be replaced... (swing)
     public void display(){
         System.out.println("╔" + "═".repeat(height*2) + "╗");
         for(int x = 0; x< width; x++) {
@@ -85,6 +87,7 @@ public class Grid {
         System.out.println("╚" + "═".repeat(height*2) + "╝");
     }
 
+    //reveal tiles recursively:
     public void reveal(int x, int y){
         if(grid[x][y].isBomb()){
             grid[x][y].setVisible(true);
@@ -103,7 +106,7 @@ public class Grid {
             if(inGrid(x-1,y-1) && !grid[x-1][y-1].isVisible()){reveal(x-1,y-1);}
         }
     }
-
+    //reveal all tiles (end of game):
     public void revealAll(){
         for(int i = 0; i < width; i++ )
         {
@@ -112,5 +115,37 @@ public class Grid {
                 grid[i][j].setVisible(true);
             }
         }
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public Tile[][] getGrid() {
+        return grid;
+    }
+
+    public void setGrid(Tile[][] grid) {
+        this.grid = grid;
+    }
+
+    public boolean isExploded() {
+        return exploded;
+    }
+
+    public void setExploded(boolean exploded) {
+        this.exploded = exploded;
     }
 }

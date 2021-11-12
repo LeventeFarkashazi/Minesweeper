@@ -1,35 +1,36 @@
 package minesweeper;
 
 public class GameLogic {
-    Grid g;
-    int width = 85;
-    int height = 85;
-    int bombs = 0;
-    int anyadseszeret = width * height - bombs;
+    Grid grid;
+    Graphic graphic;
+    int width = 10;
+    int height = 10;
+    int bombs = 3;
 
     void initGame(){
-        System.out.println("tyű:" + anyadseszeret);
-        g = new Grid(width,height);
-        g.putBombs(bombs);
-        g.checkNeighbours();
+        grid = new Grid(width,height);
+        graphic = new Graphic(grid);
+        grid.putBombs(bombs);
+        grid.checkNeighbours();
+        graphic.initDisplay();
     }
 
     void startGame(){
-        g.display();
+        grid.display();
     }
 
     void clickTile(int x, int y){
-        g.reveal(x,y);
-        g.display();
+        grid.reveal(x,y);
+        grid.display();
     }
 
     boolean isExploded(){
-        return g.isExploded();
+        return grid.isExploded();
     }
 
     void endGame(){
-        g.revealAll();
-        g.display();
+        grid.revealAll();
+        grid.display();
         System.out.println("végæ xdddddd");
     }
 }

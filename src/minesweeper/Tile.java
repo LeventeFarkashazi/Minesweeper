@@ -1,23 +1,11 @@
 package minesweeper;
 
 public class Tile {
-    int x;
-    int y;
     private boolean bomb;
     private int bombNeighbours;
     private boolean visible;
 
-    Tile(){
-        this.x = -1;
-        this.y = -1;
-        this.bomb = false;
-        this.visible = false;
-        this.bombNeighbours = 0;
-    }
-
-    Tile(int x, int y, boolean isBomb, boolean isVisible, int bombNeighbours){
-        this.x = x;
-        this.y = y;
+    Tile(boolean isBomb, boolean isVisible, int bombNeighbours){
         this.bomb = isBomb;
         this.visible = isVisible;
         this.bombNeighbours = bombNeighbours;
