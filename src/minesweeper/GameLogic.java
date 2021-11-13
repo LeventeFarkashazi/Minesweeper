@@ -3,26 +3,19 @@ package minesweeper;
 public class GameLogic {
     Grid grid;
     Graphic graphic;
-    int width = 26;
-    int height = 16;
-    int bombs = 50;
+    int width = 35;
+    int height = 30;
+    int bombs = 150;
 
 
     void initGame(){
         grid = new Grid(width,height);
-        graphic = new Graphic(grid);
+        graphic = new Graphic(grid,this);
         grid.putBombs(bombs);
         grid.checkNeighbours();
     }
 
     void startGame(){
-        grid.display();
-        graphic.drawGame();
-    }
-
-    void clickTile(int x, int y){
-        grid.reveal(x,y);
-        grid.display();
         graphic.drawGame();
     }
 
@@ -32,8 +25,6 @@ public class GameLogic {
 
     void endGame(){
         grid.revealAll();
-        grid.display();
-        graphic.drawGame();
-        System.out.println("végæ xdddddd");
+        System.out.println("GAME OVER");
     }
 }

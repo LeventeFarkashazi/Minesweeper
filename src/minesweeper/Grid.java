@@ -71,22 +71,6 @@ public class Grid {
         }
     }
 
-    //print out the grid. should be replaced... (swing)
-    public void display(){
-        System.out.println("╔" + "═".repeat(height*2) + "╗");
-        for(int x = 0; x< width; x++) {
-            System.out.print("║");
-            for (int y = 0; y < height; y++)
-                if(grid[x][y].isVisible())
-                    System.out.print(grid[x][y].getBombNeighbours() +" ");
-                else
-                    System.out.print("  ");
-            System.out.print("║");
-            System.out.println();
-        }
-        System.out.println("╚" + "═".repeat(height*2) + "╝");
-    }
-
     public int GetTileNeighbours(int x,int y){
         if(grid[x][y].isVisible())
             return grid[x][y].getBombNeighbours();
@@ -113,13 +97,14 @@ public class Grid {
             if(inGrid(x-1,y-1) && !grid[x-1][y-1].isVisible()){reveal(x-1,y-1);}
         }
     }
+
     //reveal all tiles (end of game):
     public void revealAll(){
-        for(int i = 0; i < width; i++ )
+        for(int x = 0; x< width; x++)
         {
-            for( int j = 0; j < height; j++ )
+            for(int y = 0; y< height; y++)
             {
-                grid[i][j].setVisible(true);
+                grid[x][y].setVisible(true);
             }
         }
     }
