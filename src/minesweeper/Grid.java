@@ -87,6 +87,13 @@ public class Grid {
         System.out.println("╚" + "═".repeat(height*2) + "╝");
     }
 
+    public int GetTileNeighbours(int x,int y){
+        if(grid[x][y].isVisible())
+            return grid[x][y].getBombNeighbours();
+        else
+            return -1;
+    }
+
     //reveal tiles recursively:
     public void reveal(int x, int y){
         if(grid[x][y].isBomb()){
