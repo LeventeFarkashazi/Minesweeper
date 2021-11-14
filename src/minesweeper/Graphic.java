@@ -18,6 +18,7 @@ public class Graphic {
     int tileDim = 25;
     JMenu menu;
     JMenuItem diffEasy, diffMedium, diffHard, diffMenu, highScores, newGame;
+    BufferedImage[] images;
 
     Graphic(Grid grid, GameLogic gameLogic) {
         this.gameLogic = gameLogic;
@@ -29,11 +30,22 @@ public class Graphic {
         gamePanel.setLayout(new GridLayout(height, width));
         gamePanel.setBorder(new EmptyBorder(tileDim / 2, tileDim / 2, tileDim / 2, tileDim / 2));
         initMenu();
+        readPictures();
         drawGame();
         frame.pack();
         frame.setMinimumSize(frame.getPreferredSize());
     }
 
+    public void readPictures() {
+        images = new BufferedImage[13];
+        for (int i = 0; i < 13; i++) {
+            try {
+                images[i] = ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\smallimages\\"+i+".png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public void initMenu() {
         JMenuBar menuBar = new JMenuBar();
@@ -65,7 +77,8 @@ public class Graphic {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 if (grid.GetTileNeighbours(x, y) == -1) {
-                    JButton tmpButton = new JButton();
+                    Icon icon = new ImageIcon(images[10]);
+                    JButton tmpButton = new JButton(icon);
                     tmpButton.setPreferredSize(new Dimension(tileDim, tileDim));
                     int finalY = y;
                     int finalX = x;
@@ -79,9 +92,9 @@ public class Graphic {
 
                     gamePanel.add(tmpButton);
                 } else {
-                    JTextField tmpText = new JTextField(Integer.toString(grid.GetTileNeighbours(x, y)));
-                    tmpText.setPreferredSize(new Dimension(tileDim, tileDim));
-                    gamePanel.add(tmpText);
+                    JLabel picLabel = new JLabel(new ImageIcon(images[grid.GetTileNeighbours(x,y)]));
+                    picLabel.setPreferredSize(new Dimension(tileDim, tileDim));
+                    gamePanel.add(picLabel);
                 }
             }
         }

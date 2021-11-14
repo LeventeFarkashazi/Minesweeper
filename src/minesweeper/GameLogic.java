@@ -13,6 +13,7 @@ public class GameLogic {
         graphic = new Graphic(grid, this);
         grid.putBombs(bombs);
         grid.checkNeighbours();
+        startGame();
     }
 
     void startGame() {
