@@ -3,9 +3,14 @@ package minesweeper;
 import java.util.Random;
 
 public class Grid {
-    private int width;
-    private int height;
-    private Tile[][] grid;
+    private final int width;
+    private final int height;
+    private final Tile[][] grid;
+
+    public boolean isExploded() {
+        return exploded;
+    }
+
     private boolean exploded;
 
     Grid(int width, int height) {
@@ -31,7 +36,7 @@ public class Grid {
     }
 
 
-    //chose bombs radnomly:
+    //chose bombs randomly:
     public void putBombs(int bombs) {
         Random rn = new Random();
         int x;
@@ -54,14 +59,14 @@ public class Grid {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 if (!grid[x][y].isBomb()) {
-                    if(inGrid(x+1,y+1)&&grid[x+1][y+1].isBomb()){grid[x][y].reveal(1);}
-                    if(inGrid(x+1,y)&&grid[x+1][y].isBomb()){grid[x][y].reveal(1);}
-                    if(inGrid(x+1,y-1)&&grid[x+1][y-1].isBomb()){grid[x][y].reveal(1);}
-                    if(inGrid(x,y+1)&&grid[x][y+1].isBomb()){grid[x][y].reveal(1);}
-                    if(inGrid(x,y-1)&&grid[x][y-1].isBomb()){grid[x][y].reveal(1);}
-                    if(inGrid(x-1,y+1)&&grid[x-1][y+1].isBomb()){grid[x][y].reveal(1);}
-                    if(inGrid(x-1,y)&&grid[x-1][y].isBomb()){grid[x][y].reveal(1);}
-                    if(inGrid(x-1,y-1)&&grid[x-1][y-1].isBomb()){grid[x][y].reveal(1);}
+                    if(inGrid(x+1,y+1)&&grid[x+1][y+1].isBomb()){grid[x][y].AddBombNeighbour(1);}
+                    if(inGrid(x+1,y)&&grid[x+1][y].isBomb()){grid[x][y].AddBombNeighbour(1);}
+                    if(inGrid(x+1,y-1)&&grid[x+1][y-1].isBomb()){grid[x][y].AddBombNeighbour(1);}
+                    if(inGrid(x,y+1)&&grid[x][y+1].isBomb()){grid[x][y].AddBombNeighbour(1);}
+                    if(inGrid(x,y-1)&&grid[x][y-1].isBomb()){grid[x][y].AddBombNeighbour(1);}
+                    if(inGrid(x-1,y+1)&&grid[x-1][y+1].isBomb()){grid[x][y].AddBombNeighbour(1);}
+                    if(inGrid(x-1,y)&&grid[x-1][y].isBomb()){grid[x][y].AddBombNeighbour(1);}
+                    if(inGrid(x-1,y-1)&&grid[x-1][y-1].isBomb()){grid[x][y].AddBombNeighbour(1);}
                 }
             }
         }
@@ -72,6 +77,14 @@ public class Grid {
             return grid[x][y].getBombNeighbours();
         else
             return -1;
+    }
+
+    public boolean isTileFlagged(int x, int y) {
+        return !grid[x][y].isVisible() && grid[x][y].isFlagged();
+    }
+
+    public boolean isTileMarked(int x, int y) {
+        return !grid[x][y].isVisible() && grid[x][y].isMarked();
     }
 
     //reveal tiles recursively:
@@ -94,6 +107,17 @@ public class Grid {
         }
     }
 
+    public void flag(int x, int y){
+        if(grid[x][y].isFlagged()){
+            grid[x][y].setFlagged(false);
+            grid[x][y].setMarked(true);
+        }else if(grid[x][y].isMarked()){
+            grid[x][y].setMarked(false);
+        }else{
+            grid[x][y].setFlagged(true);
+        }
+    }
+
     //reveal all tiles (end of game):
     public void revealAll() {
         for (int x = 0; x < width; x++) {
@@ -107,31 +131,9 @@ public class Grid {
         return width;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
     public int getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
 
-    public Tile[][] getGrid() {
-        return grid;
-    }
-
-    public void setGrid(Tile[][] grid) {
-        this.grid = grid;
-    }
-
-    public boolean isExploded() {
-        return exploded;
-    }
-
-    public void setExploded(boolean exploded) {
-        this.exploded = exploded;
-    }
 }
