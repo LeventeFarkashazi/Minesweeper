@@ -8,22 +8,22 @@ public class GameLogic {
     int bombs = 150;
 
 
-    void initGame(){
-        grid = new Grid(width,height);
-        graphic = new Graphic(grid,this);
+    void initGame() {
+        grid = new Grid(width, height);
+        graphic = new Graphic(grid, this);
         grid.putBombs(bombs);
         grid.checkNeighbours();
     }
 
-    void startGame(){
+    void startGame() {
         graphic.drawGame();
     }
 
-    boolean isExploded(){
+    boolean isExploded() {
         return grid.isExploded();
     }
 
-    void endGame(){
+    void endGame() {
         grid.revealAll();
         System.out.println("GAME OVER");
     }
