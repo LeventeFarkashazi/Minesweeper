@@ -22,9 +22,10 @@ public class GameLogic {
     public void tileLeftClick(int x, int y) {
         if (!grid.isTileFlagged(x,y)) {
             grid.reveal(x, y);
-            if (false) {
+            if (grid.getRevealed()==width*height-bombs) {
                 grid.revealAll();
-                System.out.println("YOU WON");
+                if (!isExploded())
+                    System.out.println("YOU WON");
             }
         }
     }

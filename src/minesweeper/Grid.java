@@ -6,11 +6,7 @@ public class Grid {
     private final int width;
     private final int height;
     private final Tile[][] grid;
-
-    public boolean isExploded() {
-        return exploded;
-    }
-
+    private int revealed;
     private boolean exploded;
 
     Grid(int width, int height) {
@@ -18,6 +14,7 @@ public class Grid {
         this.height = height;
         grid = new Tile[width][height];
         exploded = false;
+        revealed=0;
         init();
     }
 
@@ -94,8 +91,10 @@ public class Grid {
             exploded = true;
         } else if (grid[x][y].getBombNeighbours() != 0) {
             grid[x][y].setVisible(true);
+            revealed++;
         } else if (grid[x][y].getBombNeighbours() == 0) {
             grid[x][y].setVisible(true);
+            revealed++;
             if(inGrid(x+1,y+1) && !grid[x+1][y+1].isVisible()){reveal(x+1,y+1);}
             if(inGrid(x+1,y) && !grid[x+1][y].isVisible()){reveal(x+1,y);}
             if(inGrid(x+1,y-1) && !grid[x+1][y-1].isVisible()){reveal(x+1,y-1);}
@@ -107,13 +106,13 @@ public class Grid {
         }
     }
 
-    public void flag(int x, int y){
-        if(grid[x][y].isFlagged()){
+    public void flag(int x, int y) {
+        if (grid[x][y].isFlagged()) {
             grid[x][y].setFlagged(false);
             grid[x][y].setMarked(true);
-        }else if(grid[x][y].isMarked()){
+        } else if (grid[x][y].isMarked()) {
             grid[x][y].setMarked(false);
-        }else{
+        } else {
             grid[x][y].setFlagged(true);
         }
     }
@@ -135,5 +134,12 @@ public class Grid {
         return height;
     }
 
+    public int getRevealed() {
+        return revealed;
+    }
+
+    public boolean isExploded() {
+        return exploded;
+    }
 
 }
