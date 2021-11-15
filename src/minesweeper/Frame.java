@@ -13,24 +13,34 @@ import java.io.IOException;
 public class Frame extends JFrame {
     Grid grid;
     GameLogic gameLogic;
+    Timer timer;
     JPanel mainFrame = new JPanel();
     JPanel gamePanel = new JPanel();
+    JPanel infoPanel = new JPanel();
     int height, width;
     final int tileDim = 25;
     JMenu menu;
     JMenuItem diffEasy, diffMedium, diffOverkill, diffDeathWish, diffSzofttech, diffMenu, highScores, newGame;
     BufferedImage[] images;
 
-    Frame(Grid grid, GameLogic gameLogic) {
+    Frame(Grid grid, GameLogic gameLogic,Timer timer) {
         this.gameLogic = gameLogic;
         this.grid = grid;
+        this.timer= timer;
         this.height = grid.getHeight();
         this.width = grid.getWidth();
 
         setTitle("Epic minesweeper");
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setLayout(new BorderLayout());
+
         gamePanel.setLayout(new GridLayout(height, width));
         gamePanel.setBorder(new EmptyBorder(tileDim / 2, tileDim / 2, tileDim / 2, tileDim / 2));
+
+        infoPanel.setLayout(new BorderLayout());
+        infoPanel.setBorder(new EmptyBorder(tileDim / 2, tileDim / 2, 0, tileDim / 2));
+
         initMenu();
         readPictures();
         drawGame();
@@ -54,7 +64,6 @@ public class Frame extends JFrame {
         JMenuBar menuBar = new JMenuBar();
 
         menu = new JMenu("Game");
-
         //Difficulty menu
         diffMenu = new JMenu("Difficulty");
 
@@ -77,7 +86,7 @@ public class Frame extends JFrame {
         diffOverkill = new JMenuItem("Overkill");
         diffOverkill.addActionListener(e -> {
             dispose();
-            gameLogic.SetGameAttributes(30,16,99);
+            gameLogic.SetGameAttributes(16,16,40);
             gameLogic.initGame();
         });
         diffMenu.add(diffOverkill);
@@ -158,7 +167,13 @@ public class Frame extends JFrame {
                 }
             }
         }
-        mainFrame.add(gamePanel);
+        mainFrame.add(gamePanel,BorderLayout.CENTER);
+
+        infoPanel.removeAll();
+        timer.addPanel(infoPanel);
+        infoPanel.add(timer);
+        mainFrame.add(infoPanel, BorderLayout.NORTH);
+
         setContentPane(mainFrame);
         setVisible(true);
     }
