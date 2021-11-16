@@ -122,6 +122,10 @@ public class Frame extends JFrame {
 
         //High Scores
         highScores = new JMenuItem("High Scores");
+        highScores.addActionListener(e -> {
+            HighScoresFrame highScoresFrame = new HighScoresFrame();
+            highScoresFrame.setVisible(true);
+        });
         menu.add(highScores);
 
         menuBar.add(menu);
