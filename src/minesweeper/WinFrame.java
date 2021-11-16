@@ -39,8 +39,4 @@ public class WinFrame extends JFrame {
         setMinimumSize(new Dimension(350, 400));
         initComponents();
     }
-
-    public String getWinnerName() {
-        return winnerName;
-    }
 }
