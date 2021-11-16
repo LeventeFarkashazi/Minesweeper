@@ -14,6 +14,7 @@ public class Frame extends JFrame {
     Grid grid;
     GameLogic gameLogic;
     Timer timer;
+    FlagCounter flagCounter;
     JPanel mainFrame = new JPanel();
     JPanel gamePanel = new JPanel();
     JPanel infoPanel = new JPanel();
@@ -23,10 +24,11 @@ public class Frame extends JFrame {
     JMenuItem diffEasy, diffMedium, diffOverkill, diffDeathWish, diffSzofttech, diffMenu, highScores, newGame;
     BufferedImage[] images;
 
-    Frame(Grid grid, GameLogic gameLogic,Timer timer) {
+    Frame(Grid grid, GameLogic gameLogic,Timer timer,FlagCounter flagCounter) {
         this.gameLogic = gameLogic;
         this.grid = grid;
         this.timer= timer;
+        this.flagCounter=flagCounter;
         this.height = grid.getHeight();
         this.width = grid.getWidth();
 
@@ -94,7 +96,7 @@ public class Frame extends JFrame {
         diffDeathWish = new JMenuItem("Death Wish");
         diffDeathWish.addActionListener(e -> {
             dispose();
-            gameLogic.SetGameAttributes(60,30,350);
+            gameLogic.SetGameAttributes(60,30,50);//350
             gameLogic.initGame();
         });
         diffMenu.add(diffDeathWish);
@@ -171,7 +173,8 @@ public class Frame extends JFrame {
 
         infoPanel.removeAll();
         timer.addPanel(infoPanel);
-        infoPanel.add(timer);
+        infoPanel.add(timer,BorderLayout.WEST);
+        infoPanel.add(flagCounter,BorderLayout.EAST);
         mainFrame.add(infoPanel, BorderLayout.NORTH);
 
         setContentPane(mainFrame);

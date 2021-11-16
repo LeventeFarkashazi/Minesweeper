@@ -9,13 +9,10 @@ public class GameLogic {
     int height = 16;
     int bombs = 30;
 
-    int flags;
-
     void initGame() {
-        flags = bombs;
         timer = new Timer();
-        grid = new Grid(width, height);
-        frame = new Frame(grid, this, timer);
+        grid = new Grid(width, height,bombs);
+        frame = new Frame(grid, this, timer, grid.flagCounter);
         grid.putBombs(bombs);
         grid.checkNeighbours();
         frame.drawGame();
@@ -55,4 +52,9 @@ public class GameLogic {
         this.height = height;
         this.bombs = bombs;
     }
+
+    public int getBombs() {
+        return bombs;
+    }
+
 }

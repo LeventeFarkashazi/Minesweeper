@@ -16,7 +16,6 @@ class Timer extends JPanel {
     int seconds = 0;
 
     Timer() {
-        setBorder(BorderFactory.createMatteBorder(-1, -1, -1, -1, Color.red));
         setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
         readPictures();
         for(int i=0;i<3;i++) {

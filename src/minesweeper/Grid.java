@@ -8,11 +8,14 @@ public class Grid {
     private final Tile[][] grid;
     private int revealed;
     private boolean exploded;
+    FlagCounter flagCounter;
 
-    Grid(int width, int height) {
+
+    Grid(int width, int height, int bombs) {
         this.width = width;
         this.height = height;
         grid = new Tile[width][height];
+        flagCounter = new FlagCounter(bombs);
         exploded = false;
         revealed=0;
         init();
@@ -89,31 +92,33 @@ public class Grid {
         if (grid[x][y].isBomb()) {
             grid[x][y].setVisible(true);
             exploded = true;
-        } else if (grid[x][y].getBombNeighbours() != 0) {
+        } else if (grid[x][y].getBombNeighbours() != 0 && !grid[x][y].isFlagged()) {
             grid[x][y].setVisible(true);
             revealed++;
-        } else if (grid[x][y].getBombNeighbours() == 0) {
+        } else if (grid[x][y].getBombNeighbours() == 0 && !grid[x][y].isFlagged()) {
             grid[x][y].setVisible(true);
             revealed++;
-            if(inGrid(x+1,y+1) && !grid[x+1][y+1].isVisible()){reveal(x+1,y+1);}
-            if(inGrid(x+1,y) && !grid[x+1][y].isVisible()){reveal(x+1,y);}
-            if(inGrid(x+1,y-1) && !grid[x+1][y-1].isVisible()){reveal(x+1,y-1);}
-            if(inGrid(x,y+1) && !grid[x][y+1].isVisible()){reveal(x,y+1);}
-            if(inGrid(x,y-1) && !grid[x][y-1].isVisible()){reveal(x,y-1);}
-            if(inGrid(x-1,y+1) && !grid[x-1][y+1].isVisible()){reveal(x-1,y+1);}
-            if(inGrid(x-1,y) && !grid[x-1][y].isVisible()){reveal(x-1,y);}
-            if(inGrid(x-1,y-1) && !grid[x-1][y-1].isVisible()){reveal(x-1,y-1);}
+            if(inGrid(x+1,y+1) && !grid[x+1][y+1].isVisible() && !grid[x][y].isFlagged()){reveal(x+1,y+1);}
+            if(inGrid(x+1,y) && !grid[x+1][y].isVisible() && !grid[x][y].isFlagged()){reveal(x+1,y);}
+            if(inGrid(x+1,y-1) && !grid[x+1][y-1].isVisible() && !grid[x][y].isFlagged()){reveal(x+1,y-1);}
+            if(inGrid(x,y+1) && !grid[x][y+1].isVisible() && !grid[x][y].isFlagged()){reveal(x,y+1);}
+            if(inGrid(x,y-1) && !grid[x][y-1].isVisible() && !grid[x][y].isFlagged()){reveal(x,y-1);}
+            if(inGrid(x-1,y+1) && !grid[x-1][y+1].isVisible() && !grid[x][y].isFlagged()){reveal(x-1,y+1);}
+            if(inGrid(x-1,y) && !grid[x-1][y].isVisible() && !grid[x][y].isFlagged()){reveal(x-1,y);}
+            if(inGrid(x-1,y-1) && !grid[x-1][y-1].isVisible() && !grid[x][y].isFlagged()){reveal(x-1,y-1);}
         }
     }
 
     public void flag(int x, int y) {
         if (grid[x][y].isFlagged()) {
             grid[x][y].setFlagged(false);
+            flagCounter.increment();
             grid[x][y].setMarked(true);
         } else if (grid[x][y].isMarked()) {
             grid[x][y].setMarked(false);
-        } else {
+        } else if(flagCounter.getRemainingFlags()>0){
             grid[x][y].setFlagged(true);
+            flagCounter.decrement();
         }
     }
 
