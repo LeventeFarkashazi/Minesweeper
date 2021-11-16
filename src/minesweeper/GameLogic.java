@@ -9,20 +9,20 @@ public class GameLogic {
     int height = 16;
     int bombs = 30;
 
+    int flags;
+
     void initGame() {
+        flags = bombs;
         timer = new Timer();
         grid = new Grid(width, height);
         frame = new Frame(grid, this, timer);
         grid.putBombs(bombs);
         grid.checkNeighbours();
-    }
-
-    public void startGame() {
         frame.drawGame();
     }
 
     public void tileLeftClick(int x, int y) {
-        if(!timer.isRunning()){timer.start();}
+        if(timer.isKilled()){timer.start();}
         if (!grid.isTileFlagged(x, y)) {
             grid.reveal(x, y);
             if (grid.getRevealed() == width * height - bombs) {
@@ -35,7 +35,7 @@ public class GameLogic {
     }
 
     public void tileRightClick(int x, int y) {
-        if(!timer.isRunning()){timer.start();}
+        if(timer.isKilled()){timer.start();}
         grid.flag(x, y);
     }
 
@@ -45,7 +45,7 @@ public class GameLogic {
     }
 
     void endGame() {
-
+        timer.stop();
         grid.revealAll();
         System.out.println("GAME OVER");
     }

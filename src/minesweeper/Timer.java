@@ -15,7 +15,6 @@ class Timer extends JPanel {
     private final Runnable counter;
     int seconds = 0;
 
-    @SuppressWarnings("BusyWait")
     Timer() {
         setBorder(BorderFactory.createMatteBorder(-1, -1, -1, -1, Color.red));
         setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
@@ -24,6 +23,7 @@ class Timer extends JPanel {
             JLabel digitLabel = new JLabel(new ImageIcon(digits[10]));
             add(digitLabel);
         }
+
         counter = () -> {
             while (running) {
                 removeAll();
@@ -60,12 +60,8 @@ class Timer extends JPanel {
         }
     }
 
-    public boolean isRunning() {
-        return running;
-    }
-
-    public void setPaused() {
-
+    public boolean isKilled() {
+        return !running;
     }
 
     public void start() {
