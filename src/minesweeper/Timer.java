@@ -71,4 +71,8 @@ class Timer extends JPanel {
     public void stop() {
         running = false;
     }
+
+    public int getSeconds() {
+        return seconds;
+    }
 }

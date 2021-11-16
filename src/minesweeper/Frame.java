@@ -15,20 +15,21 @@ public class Frame extends JFrame {
     GameLogic gameLogic;
     Timer timer;
     FlagCounter flagCounter;
+    HighScoresData highScoresData;
     JPanel mainFrame = new JPanel();
     JPanel gamePanel = new JPanel();
     JPanel infoPanel = new JPanel();
     int height, width;
     final int tileDim = 25;
     JMenu menu;
-    JMenuItem diffEasy, diffMedium, diffOverkill, diffDeathWish, diffSzofttech, diffMenu, highScores, newGame;
+    JMenuItem diffMenuItem, diffMenu, highScores, newGame;
     BufferedImage[] images;
 
-    Frame(Grid grid, GameLogic gameLogic,Timer timer,FlagCounter flagCounter) {
+    Frame(Grid grid, GameLogic gameLogic, Timer timer, FlagCounter flagCounter) {
         this.gameLogic = gameLogic;
         this.grid = grid;
         this.timer= timer;
-        this.flagCounter=flagCounter;
+        this.flagCounter = flagCounter;
         this.height = grid.getHeight();
         this.width = grid.getWidth();
 
@@ -68,46 +69,16 @@ public class Frame extends JFrame {
         menu = new JMenu("Game");
         //Difficulty menu
         diffMenu = new JMenu("Difficulty");
-
-        diffEasy = new JMenuItem("Easy");
-        diffEasy.addActionListener(e -> {
-            dispose();
-            gameLogic.SetGameAttributes(9,9,10);
-            gameLogic.initGame();
-        });
-        diffMenu.add(diffEasy);
-
-        diffMedium = new JMenuItem("Intermediate");
-        diffMedium.addActionListener(e -> {
-            dispose();
-            gameLogic.SetGameAttributes(16,16,40);
-            gameLogic.initGame();
-        });
-        diffMenu.add(diffMedium);
-
-        diffOverkill = new JMenuItem("Overkill");
-        diffOverkill.addActionListener(e -> {
-            dispose();
-            gameLogic.SetGameAttributes(16,16,40);
-            gameLogic.initGame();
-        });
-        diffMenu.add(diffOverkill);
-
-        diffDeathWish = new JMenuItem("Death Wish");
-        diffDeathWish.addActionListener(e -> {
-            dispose();
-            gameLogic.SetGameAttributes(60,30,50);//350
-            gameLogic.initGame();
-        });
-        diffMenu.add(diffDeathWish);
-
-        diffSzofttech = new JMenuItem("Szofttech");
-        diffSzofttech.addActionListener(e -> {
-            dispose();
-            gameLogic.SetGameAttributes(16,16,16*16);
-            gameLogic.initGame();
-        });
-        diffMenu.add(diffSzofttech);
+        //Difficulty menu items
+        for (Difficulty tmpDiff : Difficulty.values()) {
+            diffMenuItem = new JMenuItem(tmpDiff.toString());
+            diffMenuItem.addActionListener(e -> {
+                dispose();
+                gameLogic.setDifficulty(tmpDiff);
+                gameLogic.initGame();
+            });
+            diffMenu.add(diffMenuItem);
+        }
 
         menu.add(diffMenu);
 

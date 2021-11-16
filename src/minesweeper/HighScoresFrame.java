@@ -17,7 +17,7 @@ import javax.swing.table.TableRowSorter;
 
 public class HighScoresFrame extends JFrame {
 
-    private HighScores data;
+    private HighScoresData data;
 
     static JTable table;
 
@@ -27,6 +27,7 @@ public class HighScoresFrame extends JFrame {
         table = new JTable(data);
         table.setFillsViewportHeight(true);
 
+        //Sort
         table.setRowSorter(new TableRowSorter<>(data));
 
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
@@ -34,19 +35,19 @@ public class HighScoresFrame extends JFrame {
         List<RowSorter.SortKey> sortKeys = new ArrayList<>();
 
         sortKeys.add(new RowSorter.SortKey(1, SortOrder.ASCENDING));
-
         sortKeys.add(new RowSorter.SortKey(2, SortOrder.ASCENDING));
 
         sorter.setSortKeys(sortKeys);
         sorter.sort();
 
+        //Render
         table.setDefaultRenderer(String.class, new ScoreTableCellRenderer(table.getDefaultRenderer(String.class)));
         table.setDefaultRenderer(Enum.class, new ScoreTableCellRenderer(table.getDefaultRenderer(Enum.class)));
         table.setDefaultRenderer(Integer.class, new ScoreTableCellRenderer(table.getDefaultRenderer(Integer.class)));
 
         this.add(new JScrollPane(table),BorderLayout.CENTER);
 
-        /*
+/*
         JPanel addPanel = new JPanel();
         addPanel.add(new JLabel("Name:"));
         JTextField newPlayerName = new JTextField(20);
@@ -68,11 +69,22 @@ public class HighScoresFrame extends JFrame {
          */
     }
 
+    public void addWinner(String playerName, Difficulty diff, int time){
+        data.addScore(playerName,diff,time);
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("scores.dat"));
+            oos.writeObject(data.scores);
+            oos.close();
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public HighScoresFrame() {
         super("High Scores");
 
         try {
-            data = new HighScores();
+            data = new HighScoresData();
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream("scores.dat"));
             data.scores = (List<Score>)ois.readObject();
             ois.close();

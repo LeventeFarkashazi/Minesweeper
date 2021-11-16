@@ -5,7 +5,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HighScores extends AbstractTableModel {
+public class HighScoresData extends AbstractTableModel {
 
     List<Score> scores = new ArrayList<>();
 

@@ -4,12 +4,15 @@ public class GameLogic {
     Grid grid;
     Frame frame;
     Timer timer;
+    HighScoresFrame highScoresFrame;
+    Difficulty difficulty = Difficulty.INTERMEDIATE;
 
     int width = 16;
     int height = 16;
     int bombs = 30;
 
     void initGame() {
+        highScoresFrame = new HighScoresFrame();
         timer = new Timer();
         grid = new Grid(width, height,bombs);
         frame = new Frame(grid, this, timer, grid.flagCounter);
@@ -24,9 +27,12 @@ public class GameLogic {
             grid.reveal(x, y);
             if (grid.getRevealed() == width * height - bombs) {
                 grid.revealAll();
-                if (!isExploded())
+                if (!isExploded()){
                     System.out.println("YOU WON");
                     timer.stop();
+                    WinFrame winFrame = new WinFrame(highScoresFrame, difficulty, timer.getSeconds());
+                    winFrame.setVisible(true);
+                }
             }
         }
     }
@@ -53,8 +59,14 @@ public class GameLogic {
         this.bombs = bombs;
     }
 
-    public int getBombs() {
-        return bombs;
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+        switch (difficulty){
+            case EASY -> SetGameAttributes(9,9,10);
+            case INTERMEDIATE -> SetGameAttributes(16,16,40);
+            case OVERKILL -> SetGameAttributes(30,16,99);
+            case DEATH_WISH -> SetGameAttributes(60,30,50);
+            case SZOFTTECH -> SetGameAttributes(16,16,16*16);
+        }
     }
-
 }
