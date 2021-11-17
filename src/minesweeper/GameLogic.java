@@ -14,9 +14,9 @@ public class GameLogic {
     void initGame() {
         highScoresFrame = new HighScoresFrame();
         timer = new Timer();
-        grid = new Grid(width, height,bombs);
-        frame = new Frame(grid, this, timer, grid.flagCounter);
+        grid = new Grid(width, height, bombs);
         grid.putBombs(bombs);
+        frame = new Frame(grid, this, timer, grid.flagCounter);
         grid.checkNeighbours();
         frame.drawGame();
     }
@@ -60,13 +60,15 @@ public class GameLogic {
     }
 
     public void setDifficulty(Difficulty difficulty) {
-        this.difficulty = difficulty;
-        switch (difficulty){
-            case EASY -> SetGameAttributes(9,9,10);
-            case INTERMEDIATE -> SetGameAttributes(16,16,40);
-            case OVERKILL -> SetGameAttributes(30,16,99);
-            case DEATH_WISH -> SetGameAttributes(60,30,350);
-            case SZOFTTECH -> SetGameAttributes(16,16,16*16);
+        if (difficulty != null) {
+            this.difficulty = difficulty;
+            switch (difficulty) {
+                case EASY -> SetGameAttributes(9, 9, 5);
+                case INTERMEDIATE -> SetGameAttributes(16, 16, 40);
+                case OVERKILL -> SetGameAttributes(30, 16, 99);
+                case DEATH_WISH -> SetGameAttributes(60, 30, 350);
+                case SZOFTTECH -> SetGameAttributes(16, 16, 16 * 16);
+            }
         }
     }
 }

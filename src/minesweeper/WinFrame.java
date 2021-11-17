@@ -1,7 +1,11 @@
 package minesweeper;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class WinFrame extends JFrame {
     HighScoresFrame highScoresFrame;
@@ -11,12 +15,21 @@ public class WinFrame extends JFrame {
 
     private void initComponents() {
         this.setLayout(new BorderLayout());
-        //table.setFillsViewportHeight(true);
 
-        JPanel addPanel = new JPanel();
-        addPanel.add(new JLabel("Name:"));
+        JPanel imagePanel = new JPanel();
+        try {
+            JLabel picLabel = new JLabel(new ImageIcon(ImageIO.read(new File(System.getProperty("user.dir") + "\\src\\images\\winedited.png"))));
+            imagePanel.add(picLabel);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        imagePanel.setBorder(new EmptyBorder(12,12,0,12));
+
+        JPanel namePanel = new JPanel();
+        namePanel.add(new JLabel("Name:"));
         JTextField winnerTextField = new JTextField(20);
-        addPanel.add(winnerTextField);
+        namePanel.add(winnerTextField);
 
         JButton addButton = new JButton("OK");
         addButton.addActionListener(ae -> {
@@ -24,19 +37,21 @@ public class WinFrame extends JFrame {
             highScoresFrame.addWinner(winnerName,difficulty,time);
             dispose();
         });
-        addPanel.add(addButton);
+        namePanel.add(addButton);
 
-        this.add(addPanel, BorderLayout.SOUTH);
+        this.add(imagePanel, BorderLayout.CENTER);
+        this.add(namePanel, BorderLayout.SOUTH);
+        pack();
     }
 
     public WinFrame(HighScoresFrame highScoresFrame,Difficulty difficulty, int time) {
-        super("You Won!");
+        super("You Win!");
 
         this.difficulty = difficulty;
         this.highScoresFrame = highScoresFrame;
         this.time=time;
 
-        setMinimumSize(new Dimension(350, 400));
+        //setMinimumSize(new Dimension(350, 400));
         initComponents();
     }
 }

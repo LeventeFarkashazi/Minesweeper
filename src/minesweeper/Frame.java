@@ -15,7 +15,6 @@ public class Frame extends JFrame {
     GameLogic gameLogic;
     Timer timer;
     FlagCounter flagCounter;
-    HighScoresData highScoresData;
     JPanel mainFrame = new JPanel();
     JPanel gamePanel = new JPanel();
     JPanel infoPanel = new JPanel();
@@ -26,10 +25,11 @@ public class Frame extends JFrame {
     BufferedImage[] images;
 
     Frame(Grid grid, GameLogic gameLogic, Timer timer, FlagCounter flagCounter) {
+        if (grid!=null){
         this.gameLogic = gameLogic;
-        this.grid = grid;
         this.timer= timer;
         this.flagCounter = flagCounter;
+        this.grid = grid;
         this.height = grid.getHeight();
         this.width = grid.getWidth();
 
@@ -50,7 +50,7 @@ public class Frame extends JFrame {
         pack();
         setMinimumSize(getPreferredSize());
         setLocationRelativeTo(null);
-    }
+    }}
 
     public void readPictures() {
         images = new BufferedImage[13];
@@ -146,7 +146,7 @@ public class Frame extends JFrame {
         }
         mainFrame.add(gamePanel,BorderLayout.CENTER);
 
-        infoPanel.removeAll();
+        //infoPanel.removeAll();
         timer.addPanel(infoPanel);
         infoPanel.add(timer,BorderLayout.WEST);
         infoPanel.add(flagCounter,BorderLayout.EAST);
