@@ -63,7 +63,7 @@ public class GameLogic {
         if (difficulty != null) {
             this.difficulty = difficulty;
             switch (difficulty) {
-                case EASY -> SetGameAttributes(9, 9, 5);
+                case EASY -> SetGameAttributes(9, 9, 10);
                 case INTERMEDIATE -> SetGameAttributes(16, 16, 40);
                 case OVERKILL -> SetGameAttributes(30, 16, 99);
                 case DEATH_WISH -> SetGameAttributes(60, 30, 350);
