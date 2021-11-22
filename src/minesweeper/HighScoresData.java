@@ -1,17 +1,45 @@
 package minesweeper;
 
-
 import javax.swing.table.AbstractTableModel;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HighScoresData extends AbstractTableModel {
+    private static HighScoresData instance;
 
-    List<Score> scores = new ArrayList<>();
+    private List<Score> scores = new ArrayList<>();
+
+    private HighScoresData() {
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("scores.dat"));
+            setScores((List<Score>) ois.readObject());
+            ois.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static HighScoresData getInstance() {
+        if (instance == null) {
+            instance = new HighScoresData();
+        }
+        return instance;
+    }
 
     public void addScore(String playerName, Difficulty diff, int time) {
         scores.add(new Score(playerName, diff, time));
         fireTableDataChanged();
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("scores.dat"));
+            oos.writeObject(getScores());
+            oos.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
@@ -54,8 +82,17 @@ public class HighScoresData extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return (columnIndex>1);
+        return (columnIndex > 1);
     }
+
+    public void setScores(List<Score> scores) {
+        this.scores = scores;
+    }
+
+    public List<Score> getScores() {
+        return scores;
+    }
+
 }
 
 

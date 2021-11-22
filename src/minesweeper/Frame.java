@@ -1,14 +1,11 @@
 package minesweeper;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class Frame extends JFrame {
     private final Grid grid;
@@ -16,16 +13,16 @@ public class Frame extends JFrame {
     private final JPanel mainFrame = new JPanel();
     private final JPanel gamePanel = new JPanel();
     private final JPanel infoPanel = new JPanel();
-    private final int height;
-    private final int width;
+    private final int height, width;
     private final int tileDim = 25;
-    private BufferedImage[] images;
+    private final BufferedImage[] pictures;
 
     Frame() {
         grid = Grid.getInstance();
         gameLogic = GameLogic.getInstance();
         height = GameLogic.getInstance().getHeight();
         width = GameLogic.getInstance().getWidth();
+        pictures = ImageReader.getInstance().getImages();
 
         setTitle("Epic minesweeper");
         setResizable(false);
@@ -39,28 +36,17 @@ public class Frame extends JFrame {
         infoPanel.setBorder(new EmptyBorder(tileDim / 2, tileDim / 2, 0, tileDim / 2));
 
         initMenu();
-        readPictures();
         drawGame();
         pack();
         setMinimumSize(getPreferredSize());
         setLocationRelativeTo(null);
     }
 
-    public void readPictures() {
-        images = new BufferedImage[13];
-        for (int i = 0; i < 13; i++) {
-            try {
-                images[i] = ImageIO.read(new File(System.getProperty("user.dir") + "\\src\\images\\" + i + ".png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     public void initMenu() {
         JMenuBar menuBar = new JMenuBar();
 
         JMenu menu = new JMenu("Game");
+
         //Difficulty menu
         JMenuItem diffMenu = new JMenu("Difficulty");
         //Difficulty menu items
@@ -73,7 +59,6 @@ public class Frame extends JFrame {
             });
             diffMenu.add(diffMenuItem);
         }
-
         menu.add(diffMenu);
 
         //New Game
@@ -91,10 +76,8 @@ public class Frame extends JFrame {
             highScoresFrame.setVisible(true);
         });
         menu.add(highScores);
-
         menuBar.add(menu);
         setJMenuBar(menuBar);
-
     }
 
     public void drawGame() {
@@ -102,12 +85,12 @@ public class Frame extends JFrame {
             for (int x = 0; x < width; x++) {
                 if (grid.GetTileNeighbours(x, y) == -1) {
                     Icon tmpIcon;
-                    if(grid.isTileFlagged(x, y))
-                        tmpIcon = new ImageIcon(images[11]);
-                    else if(grid.isTileMarked(x, y))
-                        tmpIcon = new ImageIcon(images[12]);
+                    if (grid.isTileFlagged(x, y))
+                        tmpIcon = new ImageIcon(pictures[11]);
+                    else if (grid.isTileMarked(x, y))
+                        tmpIcon = new ImageIcon(pictures[12]);
                     else
-                        tmpIcon = new ImageIcon(images[10]);
+                        tmpIcon = new ImageIcon(pictures[10]);
                     JButton tmpButton = new JButton(tmpIcon);
                     tmpButton.setPreferredSize(new Dimension(tileDim, tileDim));
                     int finalY = y;
@@ -122,7 +105,7 @@ public class Frame extends JFrame {
                                 }
                                 gamePanel.removeAll();
                                 drawGame();
-                            }else if (e.getButton() == 3) {
+                            } else if (e.getButton() == 3) {
                                 gameLogic.tileRightClick(finalX, finalY);
                                 gamePanel.removeAll();
                                 drawGame();
@@ -132,21 +115,20 @@ public class Frame extends JFrame {
 
                     gamePanel.add(tmpButton);
                 } else {
-                    JLabel picLabel = new JLabel(new ImageIcon(images[grid.GetTileNeighbours(x, y)]));
+                    JLabel picLabel = new JLabel(new ImageIcon(pictures[grid.GetTileNeighbours(x, y)]));
                     picLabel.setPreferredSize(new Dimension(tileDim, tileDim));
                     gamePanel.add(picLabel);
                 }
             }
         }
 
-        infoPanel.add(Timer.getInstance(),BorderLayout.WEST);
-        infoPanel.add(FlagCounter.getInstance(),BorderLayout.EAST);
+        infoPanel.add(Timer.getInstance(), BorderLayout.WEST);
+        infoPanel.add(FlagCounter.getInstance(), BorderLayout.EAST);
 
         mainFrame.add(infoPanel, BorderLayout.NORTH);
-        mainFrame.add(gamePanel,BorderLayout.CENTER);
+        mainFrame.add(gamePanel, BorderLayout.CENTER);
 
         setContentPane(mainFrame);
         setVisible(true);
     }
 }
-

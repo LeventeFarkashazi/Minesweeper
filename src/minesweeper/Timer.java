@@ -10,16 +10,17 @@ class Timer extends JPanel {
     BufferedImage[] digits;
     private boolean running;
     private final Runnable counter;
-    int seconds = 0;
+    int seconds;
 
-    public static Timer getInstance(){
-        if(instance == null){
+    public static Timer getInstance() {
+        if (instance == null) {
             instance = new Timer();
         }
         return instance;
     }
 
     private Timer() {
+        seconds = 0;
         setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
         digits = ImageReader.getInstance().getDigits();
         for (int i = 0; i < 3; i++) {
@@ -29,16 +30,8 @@ class Timer extends JPanel {
 
         counter = () -> {
             while (running) {
-                removeAll();
-                String digitString = String.format("%03d", Math.min(seconds++, 999));
-                JLabel digitLabel1 = new JLabel(new ImageIcon(digits[Character.getNumericValue(digitString.charAt(0))]));
-                add(digitLabel1);
-                JLabel digitLabel2 = new JLabel(new ImageIcon(digits[Character.getNumericValue(digitString.charAt(1))]));
-                add(digitLabel2);
-                JLabel digitLabel3 = new JLabel(new ImageIcon(digits[Character.getNumericValue(digitString.charAt(2))]));
-                add(digitLabel3);
-                javax.swing.SwingUtilities.updateComponentTreeUI(this);
-
+                seconds++;
+                drawTimer();
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
@@ -46,6 +39,18 @@ class Timer extends JPanel {
                 }
             }
         };
+    }
+
+    private void drawTimer() {
+        removeAll();
+        String digitString = String.format("%03d", Math.min(seconds, 999));
+        JLabel digitLabel1 = new JLabel(new ImageIcon(digits[Character.getNumericValue(digitString.charAt(0))]));
+        add(digitLabel1);
+        JLabel digitLabel2 = new JLabel(new ImageIcon(digits[Character.getNumericValue(digitString.charAt(1))]));
+        add(digitLabel2);
+        JLabel digitLabel3 = new JLabel(new ImageIcon(digits[Character.getNumericValue(digitString.charAt(2))]));
+        add(digitLabel3);
+        javax.swing.SwingUtilities.updateComponentTreeUI(this);
     }
 
     public boolean isKilled() {
@@ -59,9 +64,17 @@ class Timer extends JPanel {
 
     public void stop() {
         running = false;
+        drawTimer();
     }
+
+    public void resetTimer() {
+        instance = new Timer();
+        drawTimer();
+    }
+
 
     public int getSeconds() {
         return seconds;
     }
+
 }

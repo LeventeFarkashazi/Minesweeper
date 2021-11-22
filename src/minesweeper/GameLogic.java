@@ -8,26 +8,17 @@ public class GameLogic {
     HighScoresFrame highScoresFrame;
     Difficulty difficulty = Difficulty.INTERMEDIATE;
 
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public int getBombs() {
-        return bombs;
-    }
-
     private int width = 16;
     private int height = 16;
     private int bombs = 30;
 
-    private GameLogic(){}
+    private  int tileDim = 25;
 
-    public static GameLogic getInstance(){
-        if(instance == null){
+    private GameLogic() {
+    }
+
+    public static GameLogic getInstance() {
+        if (instance == null) {
             instance = new GameLogic();
         }
         return instance;
@@ -38,20 +29,25 @@ public class GameLogic {
         Grid.getInstance().resetGrid();
         grid = Grid.getInstance();
         grid.putBombs(bombs);
+        Timer.getInstance().resetTimer();
+        FlagCounter.getInstance().resetFlags();
+        //GamePanel.getInstance().resetGamePanel();
+        //GamePanel.getInstance().drawGame();
         frame = new Frame();
         grid.checkNeighbours();
     }
 
     public void tileLeftClick(int x, int y) {
-        if(Timer.getInstance().isKilled()){Timer.getInstance().start();}
+        if (Timer.getInstance().isKilled()) {
+            Timer.getInstance().start();
+        }
         if (!grid.isTileFlagged(x, y)) {
             grid.reveal(x, y);
             if (grid.getRevealed() == width * height - bombs) {
                 grid.revealAll();
-                if (!isExploded()){
-                    System.out.println("YOU WON");
+                if (!isExploded()) {
                     Timer.getInstance().stop();
-                    WinFrame winFrame = new WinFrame(highScoresFrame, difficulty, Timer.getInstance().getSeconds());
+                    WinFrame winFrame = new WinFrame();
                     winFrame.setVisible(true);
                 }
             }
@@ -59,7 +55,9 @@ public class GameLogic {
     }
 
     public void tileRightClick(int x, int y) {
-        if(Timer.getInstance().isKilled()){Timer.getInstance().start();}
+        if (Timer.getInstance().isKilled()) {
+            Timer.getInstance().start();
+        }
         grid.flag(x, y);
     }
 
@@ -84,7 +82,7 @@ public class GameLogic {
         if (difficulty != null) {
             this.difficulty = difficulty;
             switch (difficulty) {
-                case EASY -> SetGameAttributes(9, 9, 10);
+                case EASY -> SetGameAttributes(9, 9, 5);
                 case INTERMEDIATE -> SetGameAttributes(16, 16, 40);
                 case OVERKILL -> SetGameAttributes(30, 16, 99);
                 case DEATH_WISH -> SetGameAttributes(60, 30, 350);
@@ -92,4 +90,21 @@ public class GameLogic {
             }
         }
     }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getBombs() {
+        return bombs;
+    }
+
+    public int getTileDim() {
+        return tileDim;
+    }
+
 }

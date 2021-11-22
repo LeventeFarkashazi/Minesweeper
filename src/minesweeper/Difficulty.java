@@ -1,9 +1,9 @@
 package minesweeper;
 
 public enum Difficulty {
-    EASY ("Easy"),
-    INTERMEDIATE ("Intermediate"),
-    OVERKILL ("Overkill"),
+    EASY("Easy"),
+    INTERMEDIATE("Intermediate"),
+    OVERKILL("Overkill"),
     DEATH_WISH("Death Wish"),
     SZOFTTECH("Szofttech");
 
@@ -16,7 +16,6 @@ public enum Difficulty {
     public String toString() {
         return this.name;
     }
-
 
 }
 

@@ -1,22 +1,16 @@
 package minesweeper;
 
-import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HighScoresFrame extends JFrame {
 
-    private HighScoresData data;
+    private final HighScoresData data;
 
     static JTable table;
 
@@ -44,9 +38,10 @@ public class HighScoresFrame extends JFrame {
         table.setDefaultRenderer(Enum.class, new ScoreTableCellRenderer(table.getDefaultRenderer(Enum.class)));
         table.setDefaultRenderer(Integer.class, new ScoreTableCellRenderer(table.getDefaultRenderer(Integer.class)));
 
-        this.add(new JScrollPane(table),BorderLayout.CENTER);
+        this.add(new JScrollPane(table), BorderLayout.CENTER);
 
 /*
+        //Add winners manually (kinda cheating lol...)
         JPanel addPanel = new JPanel();
         addPanel.add(new JLabel("Name:"));
         JTextField newPlayerName = new JTextField(20);
@@ -65,56 +60,26 @@ public class HighScoresFrame extends JFrame {
         addPanel.add(addButton);
 
         this.add(addPanel,BorderLayout.SOUTH);
-         */
-    }
-
-    public void addWinner(String playerName, Difficulty diff, int time){
-        data.addScore(playerName,diff,time);
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("scores.dat"));
-            oos.writeObject(data.scores);
-            oos.close();
-        } catch(Exception ex) {
-            ex.printStackTrace();
-        }
+*/
     }
 
     public HighScoresFrame() {
         super("High Scores");
 
-        try {
-            data = new HighScoresData();
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("scores.dat"));
-            data.scores = (List<Score>)ois.readObject();
-            ois.close();
-        } catch(Exception ex) {
-            ex.printStackTrace();
-        }
+        data = HighScoresData.getInstance();
 
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                try {
-                    ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("scores.dat"));
-                    oos.writeObject(data.scores);
-                    oos.close();
-                } catch(Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
-
-        setMinimumSize(new Dimension(350, 400));
+        setMinimumSize(new Dimension(400, 400));
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     static class ScoreTableCellRenderer implements TableCellRenderer {
         private final TableCellRenderer renderer;
 
         public ScoreTableCellRenderer(TableCellRenderer defRenderer) {
-            if (defRenderer==table.getDefaultRenderer(Enum.class)){
+            if (defRenderer == table.getDefaultRenderer(Enum.class)) {
                 this.renderer = table.getDefaultRenderer(String.class);
-            }else
+            } else
                 this.renderer = defRenderer;
         }
 

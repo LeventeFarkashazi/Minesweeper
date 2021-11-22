@@ -94,6 +94,7 @@ public class Grid {
         }
     }
 
+    //Returns number of bomb neighbours, -1 if tile is not visible
     public int GetTileNeighbours(int x, int y) {
         if (grid[x][y].isVisible())
             return grid[x][y].getBombNeighbours();
@@ -169,8 +170,8 @@ public class Grid {
         }
     }
 
-    //reset grid
-    public void resetGrid(){
+    //resetTimer grid
+    public void resetGrid() {
         instance = new Grid();
     }
 

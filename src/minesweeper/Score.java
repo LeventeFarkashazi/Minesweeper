@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class Score implements Serializable {
 
-    private String playerName;
-    private Difficulty diff;
-    private int time;
+    private final String playerName;
+    private final Difficulty diff;
+    private final int time;
 
     public Score(String playerName, Difficulty diff, int time) {
         this.playerName = playerName;
@@ -25,5 +25,6 @@ public class Score implements Serializable {
     public int getTime() {
         return time;
     }
+
 }
 

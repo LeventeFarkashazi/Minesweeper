@@ -8,23 +8,32 @@ import java.io.File;
 import java.io.IOException;
 
 public class WinFrame extends JFrame {
-    HighScoresFrame highScoresFrame;
-    Difficulty difficulty;
-    int time;
+    private final Difficulty difficulty;
+    private final int time;
     private String winnerName;
+
+    public WinFrame() {
+        super("You Win!");
+        difficulty = GameLogic.getInstance().difficulty;
+        time = Timer.getInstance().getSeconds();
+
+        initComponents();
+        setLocationRelativeTo(null);
+        setAlwaysOnTop(true);
+    }
 
     private void initComponents() {
         this.setLayout(new BorderLayout());
 
         JPanel imagePanel = new JPanel();
         try {
-            JLabel picLabel = new JLabel(new ImageIcon(ImageIO.read(new File(System.getProperty("user.dir") + "\\src\\images\\winedited.png"))));
+            JLabel picLabel = new JLabel(new ImageIcon(ImageIO.read(new File(System.getProperty("user.dir") + "\\src\\images\\win.png"))));
             imagePanel.add(picLabel);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        imagePanel.setBorder(new EmptyBorder(12,12,0,12));
+        imagePanel.setBorder(new EmptyBorder(12, 12, 0, 12));
 
         JPanel namePanel = new JPanel();
         namePanel.add(new JLabel("Name:"));
@@ -34,7 +43,7 @@ public class WinFrame extends JFrame {
         JButton addButton = new JButton("OK");
         addButton.addActionListener(ae -> {
             winnerName = winnerTextField.getText();
-            highScoresFrame.addWinner(winnerName,difficulty,time);
+            HighScoresData.getInstance().addScore(winnerName, difficulty, time);
             dispose();
         });
         namePanel.add(addButton);
@@ -42,16 +51,5 @@ public class WinFrame extends JFrame {
         this.add(imagePanel, BorderLayout.CENTER);
         this.add(namePanel, BorderLayout.SOUTH);
         pack();
-    }
-
-    public WinFrame(HighScoresFrame highScoresFrame,Difficulty difficulty, int time) {
-        super("You Win!");
-
-        this.difficulty = difficulty;
-        this.highScoresFrame = highScoresFrame;
-        this.time=time;
-
-        //setMinimumSize(new Dimension(350, 400));
-        initComponents();
     }
 }
