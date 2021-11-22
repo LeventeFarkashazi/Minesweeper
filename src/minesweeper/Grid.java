@@ -3,26 +3,32 @@ package minesweeper;
 import java.util.Random;
 
 public class Grid {
+    private static Grid instance;
+
     private final int width;
     private final int height;
     private final Tile[][] grid;
     private int revealed;
     private boolean exploded;
-    FlagCounter flagCounter;
 
-
-    Grid(int width, int height, int bombs) {
-        this.width = width;
-        this.height = height;
+    private Grid() {
+        width = GameLogic.getInstance().getWidth();
+        height = GameLogic.getInstance().getHeight();
         grid = new Tile[width][height];
-        flagCounter = new FlagCounter(bombs);
         exploded = false;
-        revealed=0;
-        init();
+        revealed = 0;
+        initMatrix();
+    }
+
+    public static Grid getInstance() {
+        if (instance == null) {
+            instance = new Grid();
+        }
+        return instance;
     }
 
     //init the matrix:
-    public void init() {
+    public void initMatrix() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 grid[x][y] = new Tile(false, false, 0);
@@ -59,14 +65,30 @@ public class Grid {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 if (!grid[x][y].isBomb()) {
-                    if(inGrid(x+1,y+1)&&grid[x+1][y+1].isBomb()){grid[x][y].AddBombNeighbour(1);}
-                    if(inGrid(x+1,y)&&grid[x+1][y].isBomb()){grid[x][y].AddBombNeighbour(1);}
-                    if(inGrid(x+1,y-1)&&grid[x+1][y-1].isBomb()){grid[x][y].AddBombNeighbour(1);}
-                    if(inGrid(x,y+1)&&grid[x][y+1].isBomb()){grid[x][y].AddBombNeighbour(1);}
-                    if(inGrid(x,y-1)&&grid[x][y-1].isBomb()){grid[x][y].AddBombNeighbour(1);}
-                    if(inGrid(x-1,y+1)&&grid[x-1][y+1].isBomb()){grid[x][y].AddBombNeighbour(1);}
-                    if(inGrid(x-1,y)&&grid[x-1][y].isBomb()){grid[x][y].AddBombNeighbour(1);}
-                    if(inGrid(x-1,y-1)&&grid[x-1][y-1].isBomb()){grid[x][y].AddBombNeighbour(1);}
+                    if (inGrid(x + 1, y + 1) && grid[x + 1][y + 1].isBomb()) {
+                        grid[x][y].AddBombNeighbour(1);
+                    }
+                    if (inGrid(x + 1, y) && grid[x + 1][y].isBomb()) {
+                        grid[x][y].AddBombNeighbour(1);
+                    }
+                    if (inGrid(x + 1, y - 1) && grid[x + 1][y - 1].isBomb()) {
+                        grid[x][y].AddBombNeighbour(1);
+                    }
+                    if (inGrid(x, y + 1) && grid[x][y + 1].isBomb()) {
+                        grid[x][y].AddBombNeighbour(1);
+                    }
+                    if (inGrid(x, y - 1) && grid[x][y - 1].isBomb()) {
+                        grid[x][y].AddBombNeighbour(1);
+                    }
+                    if (inGrid(x - 1, y + 1) && grid[x - 1][y + 1].isBomb()) {
+                        grid[x][y].AddBombNeighbour(1);
+                    }
+                    if (inGrid(x - 1, y) && grid[x - 1][y].isBomb()) {
+                        grid[x][y].AddBombNeighbour(1);
+                    }
+                    if (inGrid(x - 1, y - 1) && grid[x - 1][y - 1].isBomb()) {
+                        grid[x][y].AddBombNeighbour(1);
+                    }
                 }
             }
         }
@@ -98,27 +120,43 @@ public class Grid {
         } else if (grid[x][y].getBombNeighbours() == 0 && !grid[x][y].isFlagged()) {
             grid[x][y].setVisible(true);
             revealed++;
-            if(inGrid(x+1,y+1) && !grid[x+1][y+1].isVisible() && !grid[x][y].isFlagged()){reveal(x+1,y+1);}
-            if(inGrid(x+1,y) && !grid[x+1][y].isVisible() && !grid[x][y].isFlagged()){reveal(x+1,y);}
-            if(inGrid(x+1,y-1) && !grid[x+1][y-1].isVisible() && !grid[x][y].isFlagged()){reveal(x+1,y-1);}
-            if(inGrid(x,y+1) && !grid[x][y+1].isVisible() && !grid[x][y].isFlagged()){reveal(x,y+1);}
-            if(inGrid(x,y-1) && !grid[x][y-1].isVisible() && !grid[x][y].isFlagged()){reveal(x,y-1);}
-            if(inGrid(x-1,y+1) && !grid[x-1][y+1].isVisible() && !grid[x][y].isFlagged()){reveal(x-1,y+1);}
-            if(inGrid(x-1,y) && !grid[x-1][y].isVisible() && !grid[x][y].isFlagged()){reveal(x-1,y);}
-            if(inGrid(x-1,y-1) && !grid[x-1][y-1].isVisible() && !grid[x][y].isFlagged()){reveal(x-1,y-1);}
+            if (inGrid(x + 1, y + 1) && !grid[x + 1][y + 1].isVisible() && !grid[x][y].isFlagged()) {
+                reveal(x + 1, y + 1);
+            }
+            if (inGrid(x + 1, y) && !grid[x + 1][y].isVisible() && !grid[x][y].isFlagged()) {
+                reveal(x + 1, y);
+            }
+            if (inGrid(x + 1, y - 1) && !grid[x + 1][y - 1].isVisible() && !grid[x][y].isFlagged()) {
+                reveal(x + 1, y - 1);
+            }
+            if (inGrid(x, y + 1) && !grid[x][y + 1].isVisible() && !grid[x][y].isFlagged()) {
+                reveal(x, y + 1);
+            }
+            if (inGrid(x, y - 1) && !grid[x][y - 1].isVisible() && !grid[x][y].isFlagged()) {
+                reveal(x, y - 1);
+            }
+            if (inGrid(x - 1, y + 1) && !grid[x - 1][y + 1].isVisible() && !grid[x][y].isFlagged()) {
+                reveal(x - 1, y + 1);
+            }
+            if (inGrid(x - 1, y) && !grid[x - 1][y].isVisible() && !grid[x][y].isFlagged()) {
+                reveal(x - 1, y);
+            }
+            if (inGrid(x - 1, y - 1) && !grid[x - 1][y - 1].isVisible() && !grid[x][y].isFlagged()) {
+                reveal(x - 1, y - 1);
+            }
         }
     }
 
     public void flag(int x, int y) {
         if (grid[x][y].isFlagged()) {
             grid[x][y].setFlagged(false);
-            flagCounter.increment();
+            FlagCounter.getInstance().increment();
             grid[x][y].setMarked(true);
         } else if (grid[x][y].isMarked()) {
             grid[x][y].setMarked(false);
-        } else if(flagCounter.getRemainingFlags()>0){
+        } else if (FlagCounter.getInstance().getRemainingFlags() > 0) {
             grid[x][y].setFlagged(true);
-            flagCounter.decrement();
+            FlagCounter.getInstance().decrement();
         }
     }
 
@@ -131,12 +169,9 @@ public class Grid {
         }
     }
 
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
+    //reset grid
+    public void resetGrid(){
+        instance = new Grid();
     }
 
     public int getRevealed() {

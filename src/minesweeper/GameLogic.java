@@ -1,35 +1,57 @@
 package minesweeper;
 
 public class GameLogic {
+    private static GameLogic instance;
+
     Grid grid;
     Frame frame;
-    Timer timer;
     HighScoresFrame highScoresFrame;
     Difficulty difficulty = Difficulty.INTERMEDIATE;
 
-    int width = 16;
-    int height = 16;
-    int bombs = 30;
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getBombs() {
+        return bombs;
+    }
+
+    private int width = 16;
+    private int height = 16;
+    private int bombs = 30;
+
+    private GameLogic(){}
+
+    public static GameLogic getInstance(){
+        if(instance == null){
+            instance = new GameLogic();
+        }
+        return instance;
+    }
 
     void initGame() {
         highScoresFrame = new HighScoresFrame();
-        timer = new Timer();
-        grid = new Grid(width, height, bombs);
+        Grid.getInstance().resetGrid();
+        grid = Grid.getInstance();
         grid.putBombs(bombs);
-        frame = new Frame(grid, this, timer, grid.flagCounter);
+        frame = new Frame();
         grid.checkNeighbours();
     }
 
     public void tileLeftClick(int x, int y) {
-        if(timer.isKilled()){timer.start();}
+        if(Timer.getInstance().isKilled()){Timer.getInstance().start();}
         if (!grid.isTileFlagged(x, y)) {
             grid.reveal(x, y);
             if (grid.getRevealed() == width * height - bombs) {
                 grid.revealAll();
                 if (!isExploded()){
                     System.out.println("YOU WON");
-                    timer.stop();
-                    WinFrame winFrame = new WinFrame(highScoresFrame, difficulty, timer.getSeconds());
+                    Timer.getInstance().stop();
+                    WinFrame winFrame = new WinFrame(highScoresFrame, difficulty, Timer.getInstance().getSeconds());
                     winFrame.setVisible(true);
                 }
             }
@@ -37,7 +59,7 @@ public class GameLogic {
     }
 
     public void tileRightClick(int x, int y) {
-        if(timer.isKilled()){timer.start();}
+        if(Timer.getInstance().isKilled()){Timer.getInstance().start();}
         grid.flag(x, y);
     }
 
@@ -47,7 +69,7 @@ public class GameLogic {
     }
 
     void endGame() {
-        timer.stop();
+        Timer.getInstance().stop();
         grid.revealAll();
         System.out.println("GAME OVER");
     }

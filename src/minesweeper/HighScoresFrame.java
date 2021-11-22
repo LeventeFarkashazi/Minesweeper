@@ -14,7 +14,6 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-
 public class HighScoresFrame extends JFrame {
 
     private HighScoresData data;
@@ -34,7 +33,7 @@ public class HighScoresFrame extends JFrame {
         table.setRowSorter(sorter);
         List<RowSorter.SortKey> sortKeys = new ArrayList<>();
 
-        sortKeys.add(new RowSorter.SortKey(1, SortOrder.ASCENDING));
+        sortKeys.add(new RowSorter.SortKey(1, SortOrder.DESCENDING));
         sortKeys.add(new RowSorter.SortKey(2, SortOrder.ASCENDING));
 
         sorter.setSortKeys(sortKeys);

@@ -11,27 +11,21 @@ import java.io.File;
 import java.io.IOException;
 
 public class Frame extends JFrame {
-    Grid grid;
-    GameLogic gameLogic;
-    Timer timer;
-    FlagCounter flagCounter;
-    JPanel mainFrame = new JPanel();
-    JPanel gamePanel = new JPanel();
-    JPanel infoPanel = new JPanel();
-    int height, width;
-    final int tileDim = 25;
-    JMenu menu;
-    JMenuItem diffMenuItem, diffMenu, highScores, newGame;
-    BufferedImage[] images;
+    private final Grid grid;
+    private final GameLogic gameLogic;
+    private final JPanel mainFrame = new JPanel();
+    private final JPanel gamePanel = new JPanel();
+    private final JPanel infoPanel = new JPanel();
+    private final int height;
+    private final int width;
+    private final int tileDim = 25;
+    private BufferedImage[] images;
 
-    Frame(Grid grid, GameLogic gameLogic, Timer timer, FlagCounter flagCounter) {
-        if (grid!=null){
-        this.gameLogic = gameLogic;
-        this.timer= timer;
-        this.flagCounter = flagCounter;
-        this.grid = grid;
-        this.height = grid.getHeight();
-        this.width = grid.getWidth();
+    Frame() {
+        grid = Grid.getInstance();
+        gameLogic = GameLogic.getInstance();
+        height = GameLogic.getInstance().getHeight();
+        width = GameLogic.getInstance().getWidth();
 
         setTitle("Epic minesweeper");
         setResizable(false);
@@ -50,7 +44,7 @@ public class Frame extends JFrame {
         pack();
         setMinimumSize(getPreferredSize());
         setLocationRelativeTo(null);
-    }}
+    }
 
     public void readPictures() {
         images = new BufferedImage[13];
@@ -66,12 +60,12 @@ public class Frame extends JFrame {
     public void initMenu() {
         JMenuBar menuBar = new JMenuBar();
 
-        menu = new JMenu("Game");
+        JMenu menu = new JMenu("Game");
         //Difficulty menu
-        diffMenu = new JMenu("Difficulty");
+        JMenuItem diffMenu = new JMenu("Difficulty");
         //Difficulty menu items
         for (Difficulty tmpDiff : Difficulty.values()) {
-            diffMenuItem = new JMenuItem(tmpDiff.toString());
+            JMenuItem diffMenuItem = new JMenuItem(tmpDiff.toString());
             diffMenuItem.addActionListener(e -> {
                 dispose();
                 gameLogic.setDifficulty(tmpDiff);
@@ -83,16 +77,15 @@ public class Frame extends JFrame {
         menu.add(diffMenu);
 
         //New Game
-        newGame = new JMenuItem("New game");
+        JMenuItem newGame = new JMenuItem("New game");
         newGame.addActionListener(e -> {
             dispose();
             gameLogic.initGame();
         });
         menu.add(newGame);
 
-
         //High Scores
-        highScores = new JMenuItem("High Scores");
+        JMenuItem highScores = new JMenuItem("High Scores");
         highScores.addActionListener(e -> {
             HighScoresFrame highScoresFrame = new HighScoresFrame();
             highScoresFrame.setVisible(true);
@@ -145,13 +138,12 @@ public class Frame extends JFrame {
                 }
             }
         }
-        mainFrame.add(gamePanel,BorderLayout.CENTER);
 
-        //infoPanel.removeAll();
-        timer.addPanel(infoPanel);
-        infoPanel.add(timer,BorderLayout.WEST);
-        infoPanel.add(flagCounter,BorderLayout.EAST);
+        infoPanel.add(Timer.getInstance(),BorderLayout.WEST);
+        infoPanel.add(FlagCounter.getInstance(),BorderLayout.EAST);
+
         mainFrame.add(infoPanel, BorderLayout.NORTH);
+        mainFrame.add(gamePanel,BorderLayout.CENTER);
 
         setContentPane(mainFrame);
         setVisible(true);
