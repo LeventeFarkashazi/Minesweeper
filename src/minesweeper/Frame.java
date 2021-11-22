@@ -105,7 +105,6 @@ public class Frame extends JFrame {
     }
 
     public void drawGame() {
-        gamePanel.removeAll();
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 if (grid.GetTileNeighbours(x, y) == -1) {
@@ -128,9 +127,11 @@ public class Frame extends JFrame {
                                 if (gameLogic.isExploded()) {
                                     gameLogic.endGame();
                                 }
+                                gamePanel.removeAll();
                                 drawGame();
                             }else if (e.getButton() == 3) {
                                 gameLogic.tileRightClick(finalX, finalY);
+                                gamePanel.removeAll();
                                 drawGame();
                             }
                         }

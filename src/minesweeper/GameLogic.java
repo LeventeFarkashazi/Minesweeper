@@ -18,7 +18,6 @@ public class GameLogic {
         grid.putBombs(bombs);
         frame = new Frame(grid, this, timer, grid.flagCounter);
         grid.checkNeighbours();
-        frame.drawGame();
     }
 
     public void tileLeftClick(int x, int y) {
