@@ -54,7 +54,7 @@ public class HighScoresFrame extends JFrame {
 
         this.add(new JScrollPane(table), BorderLayout.CENTER);
 
-
+/*
         //Add winners manually (kinda cheating lol...)
         JPanel addPanel = new JPanel();
         addPanel.add(new JLabel("Name:"));
@@ -74,7 +74,7 @@ public class HighScoresFrame extends JFrame {
         addPanel.add(addButton);
 
         this.add(addPanel,BorderLayout.SOUTH);
-
+*/
     }
 
     static class ScoreTableCellRenderer implements TableCellRenderer {
