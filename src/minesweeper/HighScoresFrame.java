@@ -14,11 +14,25 @@ public class HighScoresFrame extends JFrame {
 
     static JTable table;
 
+    public HighScoresFrame() {
+        super("High Scores");
+
+        data = HighScoresData.getInstance();
+        initComponents();
+        pack();
+        setSize(new Dimension(500, 500));
+        setLocationRelativeTo(null);
+    }
+
     private void initComponents() {
         this.setLayout(new BorderLayout());
 
         table = new JTable(data);
         table.setFillsViewportHeight(true);
+
+        table.getColumnModel().getColumn(0).setPreferredWidth(500/2);
+        table.getColumnModel().getColumn(1).setPreferredWidth(500/3);
+        table.getColumnModel().getColumn(2).setPreferredWidth(500/6);
 
         //Sort
         table.setRowSorter(new TableRowSorter<>(data));
@@ -61,16 +75,6 @@ public class HighScoresFrame extends JFrame {
 
         this.add(addPanel,BorderLayout.SOUTH);
 */
-    }
-
-    public HighScoresFrame() {
-        super("High Scores");
-
-        data = HighScoresData.getInstance();
-
-        setMinimumSize(new Dimension(400, 400));
-        initComponents();
-        setLocationRelativeTo(null);
     }
 
     static class ScoreTableCellRenderer implements TableCellRenderer {
