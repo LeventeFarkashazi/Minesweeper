@@ -57,7 +57,6 @@ public class GameLogic {
         grid.flag(x, y);
     }
 
-
     public boolean isExploded() {
         return grid.isExploded();
     }
