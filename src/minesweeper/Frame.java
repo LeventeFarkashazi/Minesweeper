@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 public class Frame extends JFrame {
     private final Grid grid;
     private final GameLogic gameLogic;
-    private final JPanel mainFrame = new JPanel();
+    private final JPanel mainPanel = new JPanel();
     private final JPanel gamePanel = new JPanel();
     private final JPanel infoPanel = new JPanel();
     private final int height, width;
@@ -27,7 +27,7 @@ public class Frame extends JFrame {
         setTitle("Epic minesweeper");
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setLayout(new BorderLayout());
+        mainPanel.setLayout(new BorderLayout());
 
         gamePanel.setLayout(new GridLayout(height, width));
         gamePanel.setBorder(new EmptyBorder(tileDim / 2, tileDim / 2, tileDim / 2, tileDim / 2));
@@ -125,10 +125,10 @@ public class Frame extends JFrame {
         infoPanel.add(Timer.getInstance(), BorderLayout.WEST);
         infoPanel.add(FlagCounter.getInstance(), BorderLayout.EAST);
 
-        mainFrame.add(infoPanel, BorderLayout.NORTH);
-        mainFrame.add(gamePanel, BorderLayout.CENTER);
+        mainPanel.add(infoPanel, BorderLayout.NORTH);
+        mainPanel.add(gamePanel, BorderLayout.CENTER);
 
-        setContentPane(mainFrame);
+        setContentPane(mainPanel);
         setVisible(true);
     }
 }

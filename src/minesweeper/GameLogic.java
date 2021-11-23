@@ -65,7 +65,8 @@ public class GameLogic {
     void endGame() {
         Timer.getInstance().stop();
         grid.revealAll();
-        System.out.println("GAME OVER");
+        GameOverFrame gameOverFrame = new GameOverFrame();
+        gameOverFrame.setVisible(true);
     }
 
     public void SetGameAttributes(int width, int height, int bombs) {
