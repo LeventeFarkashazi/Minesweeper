@@ -5,13 +5,13 @@ import java.awt.*;
 
 public class FlagCounter extends JPanel {
     private static FlagCounter instance;
-    private int remainingFlags;
     SevenSegmentDisplay display;
+    private int remainingFlags;
 
     private FlagCounter() {
         remainingFlags = GameLogic.getInstance().getBombs();
         setLayout(new FlowLayout(FlowLayout.RIGHT, 0, 0));
-        display = new SevenSegmentDisplay(this,remainingFlags);
+        display = new SevenSegmentDisplay(this, remainingFlags);
     }
 
     public static FlagCounter getInstance() {

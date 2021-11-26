@@ -7,13 +7,13 @@ class Timer extends JPanel {
     private static Timer instance;
     private final Runnable counter;
     int seconds;
-    private boolean running;
     SevenSegmentDisplay display;
+    private boolean running;
 
     private Timer() {
         seconds = 0;
         setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
-        display = new SevenSegmentDisplay(this,0);
+        display = new SevenSegmentDisplay(this, 0);
         display.displayInactive();
 
         counter = () -> {

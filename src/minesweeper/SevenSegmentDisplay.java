@@ -8,8 +8,8 @@ public class SevenSegmentDisplay {
     JLabel digitLabel1, digitLabel2, digitLabel3;
     JPanel timerPanel;
 
-    SevenSegmentDisplay(JPanel timerPanel,int initDisplayValue){
-        this.timerPanel=timerPanel;
+    SevenSegmentDisplay(JPanel timerPanel, int initDisplayValue) {
+        this.timerPanel = timerPanel;
         digits = ImageReader.getInstance().getDigits();
 
         String digitString = String.format("%03d", Math.min(initDisplayValue, 999));

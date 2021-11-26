@@ -2,12 +2,11 @@ package minesweeper;
 
 public class GameLogic {
     private static GameLogic instance;
-
+    private final int tileDim = 25;
     Grid grid;
     Frame frame;
     HighScoresFrame highScoresFrame;
     Difficulty difficulty = Difficulty.INTERMEDIATE;
-
     private int width = 16;
     private int height = 16;
     private int bombs = 30;
@@ -99,4 +98,7 @@ public class GameLogic {
         return bombs;
     }
 
+    public int getTileDim() {
+        return tileDim;
+    }
 }
