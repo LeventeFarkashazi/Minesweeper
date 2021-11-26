@@ -2,11 +2,11 @@ package minesweeper;
 
 public class GameLogic {
     private static GameLogic instance;
-    private final int tileDim = 25;
     Grid grid;
     Frame frame;
     HighScoresFrame highScoresFrame;
     Difficulty difficulty = Difficulty.INTERMEDIATE;
+
     private int width = 16;
     private int height = 16;
     private int bombs = 30;
@@ -77,7 +77,7 @@ public class GameLogic {
         if (difficulty != null) {
             this.difficulty = difficulty;
             switch (difficulty) {
-                case EASY -> SetGameAttributes(9, 9, 10);
+                case EASY -> SetGameAttributes(9, 9, 3);
                 case INTERMEDIATE -> SetGameAttributes(16, 16, 40);
                 case OVERKILL -> SetGameAttributes(30, 16, 99);
                 case DEATH_WISH -> SetGameAttributes(60, 30, 350);
@@ -99,6 +99,6 @@ public class GameLogic {
     }
 
     public int getTileDim() {
-        return tileDim;
+        return 25;
     }
 }

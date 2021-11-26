@@ -1,11 +1,8 @@
 package minesweeper;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 
 public class WinFrame extends JFrame {
     private final Difficulty difficulty;
@@ -26,17 +23,10 @@ public class WinFrame extends JFrame {
     }
 
     private void initComponents() {
-        this.setLayout(new BorderLayout());
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
 
-        JPanel imagePanel = new JPanel();
-        try {
-            JLabel picLabel = new JLabel(new ImageIcon(ImageIO.read(new File(System.getProperty("user.dir") + "\\src\\images\\win.png"))));
-            imagePanel.add(picLabel);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        imagePanel.setBorder(new EmptyBorder(12, 12, 0, 12));
+        Frame.GifPanel gifPanel = new Frame.GifPanel("\\src\\images\\youWin.gif", new Dimension(640, 360));
 
         JPanel namePanel = new JPanel();
         namePanel.add(new JLabel("Name:"));
@@ -50,9 +40,13 @@ public class WinFrame extends JFrame {
             dispose();
         });
         namePanel.add(addButton);
+        namePanel.setBorder(new EmptyBorder(12, 12, 12, 12));
 
-        this.add(imagePanel, BorderLayout.CENTER);
-        this.add(namePanel, BorderLayout.SOUTH);
+        mainPanel.add(gifPanel, BorderLayout.CENTER);
+        mainPanel.add(namePanel, BorderLayout.SOUTH);
+        mainPanel.setBorder(new EmptyBorder(12, 12, 0, 12));
+
+        setContentPane(mainPanel);
         pack();
     }
 }

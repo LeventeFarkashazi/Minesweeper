@@ -78,4 +78,22 @@ public class Frame extends JFrame {
         menuBar.add(menu);
         setJMenuBar(menuBar);
     }
+
+    static class GifPanel extends JPanel {
+
+        Image image;
+
+        public GifPanel(String path, Dimension dim) {
+            image = Toolkit.getDefaultToolkit().createImage(System.getProperty("user.dir") + path);
+            setPreferredSize(dim);
+        }
+
+        @Override
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            if (image != null) {
+                g.drawImage(image, 0, 0, this);
+            }
+        }
+    }
 }

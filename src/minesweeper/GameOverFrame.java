@@ -27,31 +27,14 @@ public class GameOverFrame extends JFrame {
         okPanel.add(addButton);
         okPanel.setBorder(new EmptyBorder(12, 12, 12, 12));
 
-        ImagePanel imagePanel = new ImagePanel();
+        Frame.GifPanel gifPanel = new Frame.GifPanel("\\src\\images\\gameOver.gif", new Dimension(640, 360));
+        gifPanel.setBorder(new EmptyBorder(12, 12, 0, 12));
 
-        mainPanel.add(imagePanel, BorderLayout.CENTER);
+        mainPanel.add(gifPanel, BorderLayout.CENTER);
         mainPanel.add(okPanel, BorderLayout.SOUTH);
         mainPanel.setBorder(new EmptyBorder(12, 12, 0, 12));
         setContentPane(mainPanel);
 
         pack();
-    }
-
-    static class ImagePanel extends JPanel {
-
-        Image image;
-
-        public ImagePanel() {
-            image = Toolkit.getDefaultToolkit().createImage(System.getProperty("user.dir") + "\\src\\images\\gameOver.gif");
-            setPreferredSize(new Dimension(640, 360));
-        }
-
-        @Override
-        public void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            if (image != null) {
-                g.drawImage(image, 0, 0, this);
-            }
-        }
     }
 }
