@@ -14,6 +14,9 @@ public class WinFrame extends JFrame {
 
     public WinFrame() {
         super("You Win!");
+        ImageIcon img = new ImageIcon(System.getProperty("user.dir") + "\\src\\minesweeper.png");
+        setIconImage(img.getImage());
+
         difficulty = GameLogic.getInstance().difficulty;
         time = Timer.getInstance().getSeconds();
 

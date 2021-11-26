@@ -2,17 +2,7 @@ package minesweeper;
 
 import java.io.Serializable;
 
-public class Score implements Serializable {
-
-    private final String playerName;
-    private final Difficulty diff;
-    private final int time;
-
-    public Score(String playerName, Difficulty diff, int time) {
-        this.playerName = playerName;
-        this.diff = diff;
-        this.time = time;
-    }
+public record Score(String playerName, Difficulty diff, int time) implements Serializable {
 
     public String getPlayerName() {
         return playerName;

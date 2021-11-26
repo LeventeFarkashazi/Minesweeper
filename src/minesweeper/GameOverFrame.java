@@ -8,28 +8,12 @@ public class GameOverFrame extends JFrame {
 
     public GameOverFrame() {
         super("Game Over!");
+        ImageIcon img = new ImageIcon(System.getProperty("user.dir") + "\\src\\minesweeper.png");
+        setIconImage(img.getImage());
 
         initComponents();
         setLocationRelativeTo(null);
         setAlwaysOnTop(true);
-    }
-
-    static class ImagePanel extends JPanel {
-
-        Image image;
-
-        public ImagePanel() {
-            image = Toolkit.getDefaultToolkit().createImage(System.getProperty("user.dir") + "\\src\\images\\gameOver.gif");
-            setPreferredSize(new Dimension(640,360));
-        }
-
-        @Override
-        public void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            if (image != null) {
-                g.drawImage(image, 0, 0, this);
-            }
-        }
     }
 
     private void initComponents() {
@@ -51,5 +35,23 @@ public class GameOverFrame extends JFrame {
         setContentPane(mainPanel);
 
         pack();
+    }
+
+    static class ImagePanel extends JPanel {
+
+        Image image;
+
+        public ImagePanel() {
+            image = Toolkit.getDefaultToolkit().createImage(System.getProperty("user.dir") + "\\src\\images\\gameOver.gif");
+            setPreferredSize(new Dimension(640, 360));
+        }
+
+        @Override
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            if (image != null) {
+                g.drawImage(image, 0, 0, this);
+            }
+        }
     }
 }

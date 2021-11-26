@@ -85,12 +85,12 @@ public class HighScoresData extends AbstractTableModel {
         return (columnIndex > 1);
     }
 
-    public void setScores(List<Score> scores) {
-        this.scores = scores;
-    }
-
     public List<Score> getScores() {
         return scores;
+    }
+
+    public void setScores(List<Score> scores) {
+        this.scores = scores;
     }
 
 }

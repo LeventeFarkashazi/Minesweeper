@@ -10,9 +10,7 @@ import java.awt.image.BufferedImage;
 public class Frame extends JFrame {
     private final Grid grid;
     private final GameLogic gameLogic;
-    private final JPanel mainPanel = new JPanel();
-    private final JPanel gamePanel = new JPanel();
-    private final JPanel infoPanel = new JPanel();
+    private final JPanel mainPanel, gamePanel, infoPanel;
     private final int height, width;
     private final int tileDim = 25;
     private final BufferedImage[] pictures;
@@ -24,22 +22,37 @@ public class Frame extends JFrame {
         width = GameLogic.getInstance().getWidth();
         pictures = ImageReader.getInstance().getImages();
 
-        setTitle("Epic minesweeper");
+        ImageIcon img = new ImageIcon(System.getProperty("user.dir") + "\\src\\minesweeper.png");
+        setIconImage(img.getImage());
+        setTitle("Minesweeper");
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
+        gamePanel = new JPanel();
         gamePanel.setLayout(new GridLayout(height, width));
         gamePanel.setBorder(new EmptyBorder(tileDim / 2, tileDim / 2, tileDim / 2, tileDim / 2));
 
+        infoPanel = new JPanel();
         infoPanel.setLayout(new BorderLayout());
         infoPanel.setBorder(new EmptyBorder(tileDim / 2, tileDim / 2, 0, tileDim / 2));
+
+
+        infoPanel.add(Timer.getInstance(), BorderLayout.WEST);
+        infoPanel.add(FlagCounter.getInstance(), BorderLayout.EAST);
+
+        mainPanel.add(infoPanel, BorderLayout.NORTH);
+        mainPanel.add(gamePanel, BorderLayout.CENTER);
+
+        setContentPane(mainPanel);
 
         initMenu();
         drawGame();
         pack();
         setMinimumSize(getPreferredSize());
         setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     public void initMenu() {
@@ -121,14 +134,6 @@ public class Frame extends JFrame {
                 }
             }
         }
-
-        infoPanel.add(Timer.getInstance(), BorderLayout.WEST);
-        infoPanel.add(FlagCounter.getInstance(), BorderLayout.EAST);
-
-        mainPanel.add(infoPanel, BorderLayout.NORTH);
-        mainPanel.add(gamePanel, BorderLayout.CENTER);
-
-        setContentPane(mainPanel);
-        setVisible(true);
+        gamePanel.updateUI();
     }
 }

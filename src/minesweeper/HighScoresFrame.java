@@ -10,12 +10,13 @@ import java.util.List;
 
 public class HighScoresFrame extends JFrame {
 
-    private final HighScoresData data;
-
     static JTable table;
+    private final HighScoresData data;
 
     public HighScoresFrame() {
         super("High Scores");
+        ImageIcon img = new ImageIcon(System.getProperty("user.dir") + "\\src\\minesweeper.png");
+        setIconImage(img.getImage());
 
         data = HighScoresData.getInstance();
         initComponents();
@@ -30,9 +31,9 @@ public class HighScoresFrame extends JFrame {
         table = new JTable(data);
         table.setFillsViewportHeight(true);
 
-        table.getColumnModel().getColumn(0).setPreferredWidth(500/2);
-        table.getColumnModel().getColumn(1).setPreferredWidth(500/3);
-        table.getColumnModel().getColumn(2).setPreferredWidth(500/6);
+        table.getColumnModel().getColumn(0).setPreferredWidth(500 / 2);
+        table.getColumnModel().getColumn(1).setPreferredWidth(500 / 3);
+        table.getColumnModel().getColumn(2).setPreferredWidth(500 / 6);
 
         //Sort
         table.setRowSorter(new TableRowSorter<>(data));
