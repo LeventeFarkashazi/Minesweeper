@@ -64,6 +64,7 @@ public class Grid {
     public void checkNeighbours() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
+                grid[x][y].setBombNeighbours(0);
                 if (!grid[x][y].isBomb()) {
                     if (inGrid(x + 1, y + 1) && grid[x + 1][y + 1].isBomb()) {
                         grid[x][y].AddBombNeighbour(1);
@@ -89,6 +90,8 @@ public class Grid {
                     if (inGrid(x - 1, y - 1) && grid[x - 1][y - 1].isBomb()) {
                         grid[x][y].AddBombNeighbour(1);
                     }
+                } else {
+                    grid[x][y].setBombNeighbours(9);
                 }
             }
         }
@@ -109,6 +112,15 @@ public class Grid {
     public boolean isTileMarked(int x, int y) {
         return !grid[x][y].isVisible() && grid[x][y].isMarked();
     }
+
+    public boolean isTileBomb(int x, int y) {
+        return !grid[x][y].isVisible() && grid[x][y].isBomb();
+    }
+
+    public void removeTileBomb(int x, int y) {
+        grid[x][y].setBomb(false);
+    }
+
 
     //reveal tiles recursively:
     public void reveal(int x, int y) {

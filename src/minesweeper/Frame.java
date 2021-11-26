@@ -1,7 +1,6 @@
 package minesweeper;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class Frame extends JFrame {
@@ -20,17 +19,16 @@ public class Frame extends JFrame {
         mainPanel.setLayout(new BorderLayout());
 
         GamePanel gamePanel = new GamePanel();
-
+        gamePanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(12,12,12,12,Color.LIGHT_GRAY),BorderFactory.createLoweredBevelBorder()));
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BorderLayout());
-
-        infoPanel.setBorder(new EmptyBorder(GameLogic.getInstance().getTileDim() / 2, GameLogic.getInstance().getTileDim() / 2, 0, GameLogic.getInstance().getTileDim() / 2));
-
         infoPanel.add(Timer.getInstance(), BorderLayout.WEST);
         infoPanel.add(FlagCounter.getInstance(), BorderLayout.EAST);
+        infoPanel.setBackground(Color.LIGHT_GRAY);
+        infoPanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(12,12,0,12,Color.LIGHT_GRAY),BorderFactory.createLoweredBevelBorder()));
 
         mainPanel.add(infoPanel, BorderLayout.NORTH);
-        mainPanel.add(gamePanel, BorderLayout.CENTER);
+        mainPanel.add(gamePanel, BorderLayout.SOUTH);
 
         setContentPane(mainPanel);
 

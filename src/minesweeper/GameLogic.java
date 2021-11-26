@@ -6,6 +6,7 @@ public class GameLogic {
     Frame frame;
     HighScoresFrame highScoresFrame;
     Difficulty difficulty = Difficulty.INTERMEDIATE;
+    private boolean started;
 
     private int width = 16;
     private int height = 16;
@@ -22,6 +23,7 @@ public class GameLogic {
     }
 
     void initGame() {
+        started = false;
         highScoresFrame = new HighScoresFrame();
         Grid.getInstance().resetGrid();
         grid = Grid.getInstance();
@@ -33,9 +35,19 @@ public class GameLogic {
     }
 
     public void tileLeftClick(int x, int y) {
-        if (Timer.getInstance().isKilled()) {
+        if (!started) {
             Timer.getInstance().start();
+
+            if (bombs < width * height) {
+                while (grid.isTileBomb(x, y)) {
+                    grid.removeTileBomb(x, y);
+                    grid.putBombs(1);
+                }
+                grid.checkNeighbours();
+            }
+            started = true;
         }
+
         if (!grid.isTileFlagged(x, y)) {
             grid.reveal(x, y);
             if (grid.getRevealed() == width * height - bombs) {
@@ -77,10 +89,12 @@ public class GameLogic {
         if (difficulty != null) {
             this.difficulty = difficulty;
             switch (difficulty) {
-                case EASY -> SetGameAttributes(9, 9, 3);
+                case CRYBABY -> SetGameAttributes(9, 9, 5);
+                case EASY -> SetGameAttributes(9, 9, 10);
                 case INTERMEDIATE -> SetGameAttributes(16, 16, 40);
                 case OVERKILL -> SetGameAttributes(30, 16, 99);
-                case DEATH_WISH -> SetGameAttributes(60, 30, 350);
+                case DEATH_WISH -> SetGameAttributes(60, 30, 300);
+                case FEELING_LUCKY -> SetGameAttributes(40, 25, 40 * 25 - 2);
                 case SZOFTTECH -> SetGameAttributes(16, 16, 16 * 16);
             }
         }
@@ -96,9 +110,5 @@ public class GameLogic {
 
     public int getBombs() {
         return bombs;
-    }
-
-    public int getTileDim() {
-        return 25;
     }
 }

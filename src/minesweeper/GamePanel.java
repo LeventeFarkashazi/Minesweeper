@@ -11,7 +11,7 @@ public class GamePanel extends JPanel {
     private final Grid grid;
     private final GameLogic gameLogic;
     private final int height, width;
-    private final int tileDim;
+    private final int tileDim = 25;
     private final BufferedImage[] pictures;
 
     GamePanel() {
@@ -19,11 +19,10 @@ public class GamePanel extends JPanel {
         gameLogic = GameLogic.getInstance();
         height = GameLogic.getInstance().getHeight();
         width = GameLogic.getInstance().getWidth();
-        tileDim = GameLogic.getInstance().getTileDim();
         pictures = ImageReader.getInstance().getImages();
 
         setLayout(new GridLayout(height, width));
-        setBorder(new EmptyBorder(tileDim / 2, tileDim / 2, tileDim / 2, tileDim / 2));
+        setBorder(new EmptyBorder(12, 12, 12, 12));
         drawGame();
     }
 

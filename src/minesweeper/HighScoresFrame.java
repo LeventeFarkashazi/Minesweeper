@@ -76,6 +76,7 @@ public class HighScoresFrame extends JFrame {
 
         this.add(addPanel,BorderLayout.SOUTH);
 */
+
     }
 
     static class ScoreTableCellRenderer implements TableCellRenderer {

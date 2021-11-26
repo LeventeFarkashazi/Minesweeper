@@ -1,6 +1,7 @@
 package minesweeper;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class SevenSegmentDisplay {
@@ -9,6 +10,7 @@ public class SevenSegmentDisplay {
     JPanel timerPanel;
 
     SevenSegmentDisplay(JPanel timerPanel, int initDisplayValue) {
+        timerPanel.setBorder(BorderFactory.createMatteBorder(12,12,12,12, Color.LIGHT_GRAY));
         this.timerPanel = timerPanel;
         digits = ImageReader.getInstance().getDigits();
 
