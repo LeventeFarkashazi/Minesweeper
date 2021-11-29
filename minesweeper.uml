@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>minesweeper</OriginalElement>
+  <nodes>
+    <node x="954.7291787890911" y="2312.553653555418">minesweeper.HighScoresFrame.ScoreTableCellRenderer</node>
+    <node x="2289.4964103961615" y="2419.997345336514">minesweeper.GamePanel</node>
+    <node x="2319.8494735007216" y="2629.880348560835">minesweeper.GamePanel.TileButton</node>
+    <node x="2547.8824360587964" y="2629.880348560835">minesweeper.GamePanel.ButtonMouseListener</node>
+    <node x="2273.044312812677" y="2710.3201885511544">minesweeper.Tile</node>
+    <node x="1585.0028404764807" y="1693.4874933044937">minesweeper.Score</node>
+    <node x="2928.0832892623703" y="2419.997345336514">minesweeper.ImageReader</node>
+    <node x="2299.3560058518624" y="2007.5719581323347">minesweeper.Frame</node>
+    <node x="2583.4696475571163" y="2220.677373358558">minesweeper.Timer</node>
+    <node x="1454.9854061221479" y="2680.7371783664735">minesweeper.Frame.GifPanel</node>
+    <node x="1596.5028404764807" y="2290.553653555418">minesweeper.HighScoresFrame</node>
+    <node x="2901.5832892623703" y="2111.4082824707502">minesweeper.SevenSegmentDisplay</node>
+    <node x="1939.523173235207" y="1983.4034229176564">minesweeper.GameLogic</node>
+    <node x="1967.023173235207" y="1613.2431690104968">minesweeper.Difficulty</node>
+    <node x="1939.523173235207" y="2408.22313530057">minesweeper.Grid</node>
+    <node x="1595.281283539149" y="2474.6454159609457">minesweeper.WinFrame</node>
+    <node x="2385.524798942035" y="1773.463010139703">minesweeper.Main</node>
+    <node x="1348.9478285956977" y="2508.1454159609457">minesweeper.GameOverFrame</node>
+    <node x="2583.4696475571163" y="1952.0719581323347">minesweeper.FlagCounter</node>
+    <node x="1562.5028404764807" y="1967.2926524206305">minesweeper.HighScoresData</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="minesweeper.WinFrame" target="minesweeper.Frame" relationship="DEPENDENCY">
+      <point x="-2.835391489952599E-4" y="-73.0004159609457" />
+      <point x="1679.781" y="2445.0" />
+      <point x="1801.9667246297313" y="2445.0" />
+      <point x="1801.9667246297313" y="1591.9251173889193" />
+      <point x="2345.660765222161" y="1591.9251173889193" />
+      <point x="2345.660765222161" y="2068.804698295716" />
+      <point x="2368.025" y="2068.804698295716" />
+      <point x="-16.8310058518623" y="-50.99995813233477" />
+    </edge>
+    <edge source="minesweeper.GameOverFrame" target="minesweeper.Frame" relationship="DEPENDENCY">
+      <point x="1.7140430236395332E-4" y="-39.5004159609457" />
+      <point x="1433.448" y="2461.349534758182" />
+      <point x="1814.693" y="2461.349534758182" />
+      <point x="1814.693" y="1603.378765222161" />
+      <point x="2322.6727314601567" y="1603.378765222161" />
+      <point x="2322.6727314601567" y="2024.3280307185955" />
+      <point x="2368.025" y="2024.3280307185955" />
+      <point x="-16.8310058518623" y="-50.99995813233477" />
+    </edge>
+    <edge source="minesweeper.GameOverFrame" target="minesweeper.Frame.GifPanel" relationship="CREATE">
+      <point x="22.791886160199056" y="-0.13417076072664713" />
+      <point x="1484.237520570488" y="2547.511245200219" />
+      <point x="-80.74788555165992" y="-21.329608426813593" />
+    </edge>
+    <edge source="minesweeper.FlagCounter" target="minesweeper.SevenSegmentDisplay" relationship="TO_ONE">
+      <point x="102.50035244288347" y="4.186766545899445E-5" />
+      <point x="2854.0" y="2058.572" />
+      <point x="2854.0" y="2143.020727775219" />
+      <point x="-80.83363472529072" y="-74.38755469553143" />
+    </edge>
+    <edge source="minesweeper.Frame" target="minesweeper.FlagCounter" relationship="DEPENDENCY">
+      <point x="22.489457068450974" y="10.23274016338155" />
+      <point x="2322.6727314601567" y="2068.804698295716" />
+      <point x="2322.6727314601567" y="2029.2653155228006" />
+      <point x="-56.34873553500711" y="-29.306642609534038" />
+    </edge>
+    <edge source="minesweeper.GamePanel" target="minesweeper.GameLogic" relationship="TO_ONE">
+      <point x="-90.0003128126773" y="-4.148520092712715E-4" />
+      <point x="2157.459133296764" y="2503.996930484505" />
+      <point x="2157.459133296764" y="2342.903" />
+      <point x="2140.692509348894" y="2342.903" />
+      <point x="2140.692509348894" y="2288.405375754251" />
+      <point x="2171.871884006053" y="2288.405375754251" />
+      <point x="2171.871884006053" y="2334.2199670872187" />
+      <point x="83.16933611368722" y="167.31654416956235" />
+    </edge>
+    <edge source="minesweeper.HighScoresFrame" target="minesweeper.HighScoresData" relationship="TO_ONE">
+      <point x="-27.505857481417706" y="-37.13401559601061" />
+      <point x="1653.496982995063" y="2256.9231529880244" />
+      <point x="1653.496982995063" y="2165.249588590236" />
+      <point x="-12.234327037095227" y="69.95693616960534" />
+    </edge>
+    <edge source="minesweeper.GameLogic" target="minesweeper.FlagCounter" relationship="DEPENDENCY">
+      <point x="117.9998267647934" y="-4.2291765657864744E-4" />
+      <point x="2140.692509348894" y="2166.903" />
+      <point x="2140.692509348894" y="2152.1579917088898" />
+      <point x="-56.34873553500711" y="93.58603357655511" />
+    </edge>
+    <edge source="minesweeper.FlagCounter" target="minesweeper.GameLogic" relationship="DEPENDENCY">
+      <point x="-102.49964755711653" y="4.186766545899445E-5" />
+      <point x="2538.5532312487885" y="2058.572" />
+      <point x="2538.5532312487885" y="2217.4082824707502" />
+      <point x="2057.523" y="2217.4082824707502" />
+      <point x="-1.7323520660283975E-4" y="183.49957708234342" />
+    </edge>
+    <edge source="minesweeper.Grid" target="minesweeper.Tile" relationship="TO_ONE">
+      <point x="103.49999999999977" y="196.24124136061118" />
+      <point x="2110.149448460249" y="2842.964376661181" />
+      <point x="2110.149448460249" y="2827.964376661181" />
+      <point x="2308.679344236442" y="2827.964376661181" />
+      <point x="2308.679344236442" y="2820.3201885511544" />
+      <point x="-97.0" y="15.0" />
+    </edge>
+    <edge source="minesweeper.Grid" target="minesweeper.GameLogic" relationship="DEPENDENCY">
+      <point x="5.2619488283583" y="-164.6042960559821" />
+      <point x="2048.2851220635653" y="2304.725932749885" />
+      <point x="2042.9419622293874" y="2304.725932749885" />
+      <point x="-14.581211005819341" y="113.24397459501051" />
+    </edge>
+    <edge source="minesweeper.GameLogic" target="minesweeper.Grid" relationship="DEPENDENCY">
+      <point x="32.43859553494531" y="142.0970376995706" />
+      <point x="2089.961768770152" y="2571.883924458775" />
+      <point x="2048.744587747582" y="2571.883924458775" />
+      <point x="2048.744587747582" y="2669.1294334408108" />
+      <point x="37.32090783342505" y="22.40629814024078" />
+    </edge>
+    <edge source="minesweeper.GamePanel" target="minesweeper.ImageReader" relationship="DEPENDENCY">
+      <point x="45.59511502756641" y="-4.143108048378963" />
+      <point x="2974.027118644067" y="2499.854237288135" />
+      <point x="2974.027118644067" y="2505.1391064025793" />
+      <point x="-11.372556880979573" y="1.1417610660651007" />
+    </edge>
+    <edge source="minesweeper.Main" target="minesweeper.GameLogic" relationship="DEPENDENCY">
+      <point x="2.0105796511415974E-4" y="39.499989860296864" />
+      <point x="2460.025" y="1892.9194163979732" />
+      <point x="2170.1750345462924" y="1892.9194163979732" />
+      <point x="2170.1750345462924" y="2026.6259788116076" />
+      <point x="2057.523" y="2026.6259788116076" />
+      <point x="-1.7323520660283975E-4" y="183.49957708234342" />
+    </edge>
+    <edge source="minesweeper.Grid" target="minesweeper.FlagCounter" relationship="DEPENDENCY">
+      <point x="103.49982676479317" y="-1.3530057003663387E-4" />
+      <point x="2105.0589383121414" y="2646.723" />
+      <point x="2105.0589383121414" y="2571.883924458775" />
+      <point x="2238.0" y="2571.883924458775" />
+      <point x="2238.0" y="2127.072" />
+      <point x="-102.49964755711653" y="68.50004186766546" />
+    </edge>
+    <edge source="minesweeper.GameLogic" target="minesweeper.WinFrame" relationship="CREATE">
+      <point x="-117.99999999999977" y="-15.000422917656579" />
+      <point x="1829.693" y="2151.903" />
+      <point x="1829.693" y="2487.645" />
+      <point x="84.5" y="-60.0004159609457" />
+    </edge>
+    <edge source="minesweeper.GamePanel" target="minesweeper.GamePanel.TileButton" relationship="CREATE">
+      <point x="-15.000312812677294" y="84.0" />
+      <point x="2364.4960975834842" y="2581.4915862204707" />
+      <point x="2376.89706310456" y="2581.4915862204707" />
+      <point x="-16.952410396161667" y="-28.0" />
+    </edge>
+    <edge source="minesweeper.FlagCounter" target="minesweeper.SevenSegmentDisplay" relationship="CREATE">
+      <point x="3.524428834680293E-4" y="106.50004186766546" />
+      <point x="2685.97" y="2192.8746657454462" />
+      <point x="2845.0264684097433" y="2192.8746657454462" />
+      <point x="2845.0264684097433" y="2193.24643021649" />
+      <point x="-79.76500275845501" y="-24.16185225426034" />
+    </edge>
+    <edge source="minesweeper.HighScoresFrame.ScoreTableCellRenderer" target="minesweeper.HighScoresFrame" relationship="INNER_CLASS">
+      <point x="255.5" y="-25.999653555417808" />
+      <point x="-84.5" y="-14.999653555417808" />
+    </edge>
+    <edge source="minesweeper.GamePanel.TileButton" target="minesweeper.Grid" relationship="DEPENDENCY">
+      <point x="-4.1039616144189495E-4" y="-27.999757588932425" />
+      <point x="2393.84906310456" y="2679.815753109166" />
+      <point x="82.20345044051851" y="33.09261780859606" />
+    </edge>
+    <edge source="minesweeper.Grid" target="minesweeper.Tile" relationship="CREATE">
+      <point x="46.76423463261176" y="113.51936307252981" />
+      <point x="2289.589931181039" y="2760.2424983731" />
+      <point x="2289.589931181039" y="2793.330814335799" />
+      <point x="-23.18614246542893" y="-11.989374215355383" />
+    </edge>
+    <edge source="minesweeper.HighScoresFrame" target="minesweeper.HighScoresData" relationship="DEPENDENCY">
+      <point x="-84.49984047648081" y="3.464445821919071E-4" />
+      <point x="1681.0028404764807" y="2352.554" />
+      <point x="1681.0028404764807" y="2239.9656840373013" />
+      <point x="1681.0028701386002" y="2239.9656840373013" />
+      <point x="2.9662119459317182E-5" y="128.00034757936965" />
+    </edge>
+    <edge source="minesweeper.Frame" target="minesweeper.GameLogic" relationship="DEPENDENCY">
+      <point x="85.49999414813783" y="4.186766545899445E-5" />
+      <point x="2428.7839705204974" y="2058.572" />
+      <point x="2428.7839705204974" y="2058.5719581323347" />
+      <point x="1976.3069705204975" y="2058.5719581323347" />
+      <point x="1976.3069705204975" y="2204.487479066167" />
+      <point x="2057.523" y="2204.487479066167" />
+      <point x="-1.7323520660283975E-4" y="183.49957708234342" />
+    </edge>
+    <edge source="minesweeper.GameLogic" target="minesweeper.Difficulty" relationship="DEPENDENCY">
+      <point x="-1.7323520660283975E-4" y="-183.50042291765635" />
+      <point x="-1.7323520660283975E-4" y="149.99983098950315" />
+    </edge>
+    <edge source="minesweeper.GamePanel.ButtonMouseListener" target="minesweeper.GamePanel" relationship="DEPENDENCY">
+      <point x="20.161631737812513" y="-55.144755340496886" />
+      <point x="2683.044067796609" y="2661.861016949152" />
+      <point x="2698.789849829266" y="2661.861016949152" />
+      <point x="2698.789849829266" y="2530.1311839097225" />
+      <point x="2414.0813559322023" y="2530.1311839097225" />
+      <point x="2414.0813559322023" y="2547.432878824977" />
+      <point x="71.84131821274605" y="43.435533488462625" />
+    </edge>
+    <edge source="minesweeper.GamePanel" target="minesweeper.Grid" relationship="TO_ONE">
+      <point x="-90.0003128126773" y="14.999585147990729" />
+      <point x="2256.0" y="2518.996930484505" />
+      <point x="2256.0" y="2631.723" />
+      <point x="103.49982676479317" y="-15.000135300570037" />
+    </edge>
+    <edge source="minesweeper.Timer" target="minesweeper.SevenSegmentDisplay" relationship="CREATE">
+      <point x="-3.985769160064592" y="-48.09768657827226" />
+      <point x="2681.9838783970517" y="2241.707660596145" />
+      <point x="-45.56877981971729" y="24.299378125394924" />
+    </edge>
+    <edge source="minesweeper.WinFrame" target="minesweeper.Frame.GifPanel" relationship="CREATE">
+      <point x="14.439780640774188" y="34.22677273899899" />
+      <point x="1635.6801974766868" y="2581.8721886999447" />
+      <point x="70.69479135453889" y="-13.693843204652694" />
+    </edge>
+    <edge source="minesweeper.WinFrame" target="minesweeper.HighScoresData" relationship="DEPENDENCY">
+      <point x="-84.500283539149" y="-4.159609457019542E-4" />
+      <point x="1531.1160096327858" y="2547.645" />
+      <point x="1531.1160096327858" y="2092.7948436642896" />
+      <point x="-3.325934277906981" y="-2.4978087563408735" />
+    </edge>
+    <edge source="minesweeper.GamePanel" target="minesweeper.GameLogic" relationship="DEPENDENCY">
+      <point x="-3.128126772935502E-4" y="-84.00041485200927" />
+      <point x="2379.4960975834842" y="2375.0" />
+      <point x="2130.569783509903" y="2375.0" />
+      <point x="73.04661027469638" y="116.44987049551719" />
+    </edge>
+    <edge source="minesweeper.GamePanel" target="minesweeper.GamePanel.ButtonMouseListener" relationship="CREATE">
+      <point x="92.026555372443" y="73.3878208867227" />
+      <point x="2640.57627118644" y="2577.385166223237" />
+      <point x="-22.306164872356476" y="-99.1854333065985" />
+    </edge>
+    <edge source="minesweeper.GameLogic" target="minesweeper.Frame" relationship="CREATE">
+      <point x="118.0" y="-176.8314647853217" />
+      <point x="2130.569783509903" y="1990.0719581323347" />
+      <point x="2130.569783509903" y="2013.572" />
+      <point x="2353.025" y="2013.572" />
+      <point x="-31.8310058518623" y="-51.0" />
+    </edge>
+    <edge source="minesweeper.Timer" target="minesweeper.SevenSegmentDisplay" relationship="TO_ONE">
+      <point x="102.50035244288347" y="-3.733585576810583E-4" />
+      <point x="2854.0" y="2349.177" />
+      <point x="2854.0" y="2268.4234597670343" />
+      <point x="-95.79448226098884" y="51.01517729628404" />
+    </edge>
+    <edge source="minesweeper.HighScoresData" target="minesweeper.Score" relationship="TO_MANY">
+      <point x="-29.99997033788054" y="-128.0" />
+      <point x="-29.99997033788054" y="95.0" />
+    </edge>
+    <edge source="minesweeper.Score" target="minesweeper.Difficulty" relationship="DEPENDENCY">
+      <point x="-16.052209648175904" y="51.30954454520452" />
+      <point x="1664.9506308283048" y="1848.0981897970378" />
+      <point x="2057.523" y="1848.0981897970378" />
+      <point x="-1.7323520660283975E-4" y="149.99983098950315" />
+    </edge>
+    <edge source="minesweeper.GamePanel.ButtonMouseListener" target="minesweeper.GameLogic" relationship="DEPENDENCY">
+      <point x="-115.00043605879637" y="-3.766611812352494E-4" />
+      <point x="2507.463374435737" y="2735.879971899654" />
+      <point x="2507.463374435737" y="2301.2643942883465" />
+      <point x="2057.523" y="2301.2643942883465" />
+      <point x="-1.7323520660283975E-4" y="183.49957708234342" />
+    </edge>
+    <edge source="minesweeper.GameLogic" target="minesweeper.Timer" relationship="DEPENDENCY">
+      <point x="-38.02317323520674" y="183.49957708234342" />
+      <point x="2019.5" y="2261.6869705204977" />
+      <point x="2653.1308152924917" y="2261.6869705204977" />
+      <point x="2653.1308152924917" y="2342.903" />
+      <point x="-102.49964755711653" y="-6.274373358558023" />
+    </edge>
+    <edge source="minesweeper.SevenSegmentDisplay" target="minesweeper.ImageReader" relationship="DEPENDENCY">
+      <point x="-2.8926237018822576E-4" y="106.00008148790084" />
+      <point x="3016.083" y="2510.0" />
+      <point x="3019.671579917089" y="2510.0" />
+      <point x="3.5882906547185485" y="0.07312909922984545" />
+    </edge>
+    <edge source="minesweeper.Frame" target="minesweeper.Difficulty" relationship="DEPENDENCY">
+      <point x="-5.851862169947708E-6" y="-50.99995813233477" />
+      <point x="2384.856" y="1941.0" />
+      <point x="2057.523" y="1941.0" />
+      <point x="-1.7323520660283975E-4" y="149.99983098950315" />
+    </edge>
+    <edge source="minesweeper.Frame" target="minesweeper.HighScoresFrame" relationship="CREATE">
+      <point x="-46.8310058518623" y="-51.0" />
+      <point x="2338.025" y="2024.3280307185955" />
+      <point x="2368.025" y="2024.3280307185955" />
+      <point x="2368.025" y="1580.743" />
+      <point x="1476.0459643074673" y="1580.743" />
+      <point x="1476.0459643074673" y="2255.7926524206305" />
+      <point x="1617.8634119583103" y="2255.7926524206305" />
+      <point x="-63.13942851817046" y="-52.405546040332865" />
+    </edge>
+    <edge source="minesweeper.WinFrame" target="minesweeper.Difficulty" relationship="DEPENDENCY">
+      <point x="84.499716460851" y="-15.000415960945702" />
+      <point x="1907.023" y="2532.645" />
+      <point x="1907.023" y="1941.0" />
+      <point x="2057.523" y="1941.0" />
+      <point x="-1.7323520660283975E-4" y="149.99983098950315" />
+    </edge>
+    <edge source="minesweeper.Frame" target="minesweeper.Timer" relationship="DEPENDENCY">
+      <point x="20.352193134779554" y="-11.139899173329695" />
+      <point x="2369.9433440810685" y="2047.432058959005" />
+      <point x="2369.9433440810685" y="2058.5719581323347" />
+      <point x="2452.8980254605353" y="2058.5719581323347" />
+      <point x="2452.8980254605353" y="2240.2616206093803" />
+      <point x="2685.9696475571163" y="2240.2616206093803" />
+      <point x="2685.9696475571163" y="2342.903" />
+      <point x="-102.49964755711653" y="-6.274373358558023" />
+    </edge>
+    <edge source="minesweeper.Frame" target="minesweeper.GamePanel" relationship="CREATE">
+      <point x="0.0" y="51.0" />
+      <point x="2384.8560058518624" y="2078.5408667032366" />
+      <point x="2401.3081034353468" y="2078.5408667032366" />
+      <point x="21.81169303918523" y="-84.0" />
+    </edge>
+    <edge source="minesweeper.GameLogic" target="minesweeper.Grid" relationship="TO_ONE">
+      <point x="117.9998267647934" y="-153.33142291765648" />
+      <point x="2068.923752057049" y="2013.572" />
+      <point x="2068.923752057049" y="2631.723" />
+      <point x="103.49982676479317" y="-15.000135300570037" />
+    </edge>
+    <edge source="minesweeper.Frame.GifPanel" target="minesweeper.Frame" relationship="INNER_CLASS">
+      <point x="0.0" y="51.0" />
+      <point x="1564.9854061221479" y="2929.223486673207" />
+      <point x="3148.0832892623703" y="2929.223486673207" />
+      <point x="3148.0832892623703" y="1926.0" />
+      <point x="2428.7839705204974" y="1926.0" />
+      <point x="2428.7839705204974" y="2024.3280307185955" />
+      <point x="2399.856" y="2024.3280307185955" />
+      <point x="14.99999414813783" y="-51.0" />
+    </edge>
+    <edge source="minesweeper.HighScoresFrame" target="minesweeper.HighScoresFrame.ScoreTableCellRenderer" relationship="CREATE">
+      <point x="-84.5" y="15.000346444582192" />
+      <point x="255.5" y="4.000346444582192" />
+    </edge>
+    <edge source="minesweeper.HighScoresData" target="minesweeper.Score" relationship="CREATE">
+      <point x="-14.99997033788054" y="-128.0" />
+      <point x="-14.99997033788054" y="95.0" />
+    </edge>
+    <edge source="minesweeper.GameLogic" target="minesweeper.Difficulty" relationship="TO_ONE">
+      <point x="-36.23683203937594" y="-0.041108052050276456" />
+      <point x="2015.6291826659353" y="2166.862314865606" />
+      <point x="2015.6291826659353" y="1762.1667580910587" />
+      <point x="-40.05471465045639" y="-1.0764109194381035" />
+    </edge>
+    <edge source="minesweeper.GamePanel.TileButton" target="minesweeper.GamePanel" relationship="INNER_CLASS">
+      <point x="22.503589603838464" y="-27.999757588932425" />
+      <point x="2416.35306310456" y="2581.4915" />
+      <point x="2403.9520975834844" y="2581.4915" />
+      <point x="24.455687187322837" y="83.99958514799073" />
+    </edge>
+    <edge source="minesweeper.WinFrame" target="minesweeper.Timer" relationship="DEPENDENCY">
+      <point x="84.499716460851" y="-30.000415960945702" />
+      <point x="1712.58251727921" y="2517.645" />
+      <point x="1712.58251727921" y="2911.232035106966" />
+      <point x="2833.7354796293735" y="2911.232035106966" />
+      <point x="2833.7354796293735" y="2407.352166758091" />
+      <point x="13.62717087404053" y="58.17479339953297" />
+    </edge>
+    <edge source="minesweeper.WinFrame" target="minesweeper.Difficulty" relationship="TO_ONE">
+      <point x="84.499716460851" y="-45.0004159609457" />
+      <point x="1736.2177729018101" y="2502.645" />
+      <point x="1736.2177729018101" y="2517.645" />
+      <point x="1854.693" y="2517.645" />
+      <point x="1854.693" y="1763.243" />
+      <point x="-90.50017323520683" y="-1.6901049684747704E-4" />
+    </edge>
+    <edge source="minesweeper.GameLogic" target="minesweeper.GameOverFrame" relationship="CREATE">
+      <point x="-117.99999999999977" y="14.999577082343421" />
+      <point x="1869.693" y="2181.903" />
+      <point x="1869.693" y="2819.3265914218764" />
+      <point x="1433.4478285956977" y="2819.3265914218764" />
+      <point x="0.0" y="39.5" />
+    </edge>
+    <edge source="minesweeper.Frame" target="minesweeper.GameLogic" relationship="TO_ONE">
+      <point x="-85.50000585186217" y="-29.99995813233477" />
+      <point x="2050.556774547449" y="2028.572" />
+      <point x="2050.556774547449" y="2275.0" />
+      <point x="117.9998267647934" y="108.09657708234363" />
+    </edge>
+    <edge source="minesweeper.GameLogic" target="minesweeper.Frame" relationship="TO_ONE">
+      <point x="118.0" y="-93.33142291765625" />
+      <point x="-85.5" y="15.000041867665459" />
+    </edge>
+    <edge source="minesweeper.HighScoresData" target="minesweeper.Difficulty" relationship="DEPENDENCY">
+      <point x="38.67077444398001" y="-126.96023333121752" />
+      <point x="1719.6736149204607" y="1900.27591881514" />
+      <point x="2057.523" y="1900.27591881514" />
+      <point x="-1.7323520660283975E-4" y="149.99983098950315" />
+    </edge>
+    <edge source="minesweeper.GamePanel.ButtonMouseListener" target="minesweeper.GamePanel" relationship="INNER_CLASS">
+      <point x="-4.360587963674334E-4" y="-106.00037666118124" />
+      <point x="2662.882" y="2553.7788609596964" />
+      <point x="2431.3830508474566" y="2553.7788609596964" />
+      <point x="2431.3830508474566" y="2563.060159206678" />
+      <point x="18.448110241934955" y="59.06281387016361" />
+    </edge>
+    <edge source="minesweeper.WinFrame" target="minesweeper.GameLogic" relationship="DEPENDENCY">
+      <point x="84.499716460851" y="-4.159609457019542E-4" />
+      <point x="1922.023" y="2547.645" />
+      <point x="1922.023" y="2375.0" />
+      <point x="1991.6476278212804" y="2375.0" />
+      <point x="-65.87554541392637" y="154.9206213015973" />
+    </edge>
+    <edge source="minesweeper.GamePanel" target="minesweeper.Grid" relationship="DEPENDENCY">
+      <point x="-3.128126772935502E-4" y="83.99958514799073" />
+      <point x="2379.4960975834842" y="2582.0" />
+      <point x="2273.496" y="2582.0" />
+      <point x="2273.496" y="2655.2372178719484" />
+      <point x="50.144491435451755" y="8.514082571378367" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.6357758620689659" showDependencies="true" x="2221.403389830508" y="2270.9999999999995" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
