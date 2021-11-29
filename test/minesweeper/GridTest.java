@@ -25,7 +25,7 @@ public class GridTest {
     @Test
     public void testPutBombs() {
         for (int i = 0; i < 2; i++) {
-            grid.putBombs(GameLogic.getInstance().getHeight() * GameLogic.getInstance().getWidth()-GameLogic.getInstance().getBombs());
+            grid.putBombs(GameLogic.getInstance().getHeight() * GameLogic.getInstance().getWidth() - GameLogic.getInstance().getBombs());
             assertTrue(grid.isTileBomb(0, 0));
             grid = Grid.getInstance();
         }
