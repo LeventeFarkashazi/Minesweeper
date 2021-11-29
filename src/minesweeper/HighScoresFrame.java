@@ -8,11 +8,20 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type High scores frame.
+ */
 public class HighScoresFrame extends JFrame {
 
+    /**
+     * The Table.
+     */
     static JTable table;
     private final HighScoresData data;
 
+    /**
+     * Instantiates a new High scores frame.
+     */
     public HighScoresFrame() {
         super("High Scores");
         ImageIcon img = new ImageIcon(System.getProperty("user.dir") + "\\src\\minesweeper.png");
@@ -79,9 +88,17 @@ public class HighScoresFrame extends JFrame {
 
     }
 
+    /**
+     * The type Score table cell renderer.
+     */
     static class ScoreTableCellRenderer implements TableCellRenderer {
         private final TableCellRenderer renderer;
 
+        /**
+         * Instantiates a new Score table cell renderer.
+         *
+         * @param defRenderer the def renderer
+         */
         public ScoreTableCellRenderer(TableCellRenderer defRenderer) {
             if (defRenderer == table.getDefaultRenderer(Enum.class)) {
                 this.renderer = table.getDefaultRenderer(String.class);

@@ -8,6 +8,9 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type High scores data.
+ */
 public class HighScoresData extends AbstractTableModel {
     private static HighScoresData instance;
 
@@ -23,6 +26,11 @@ public class HighScoresData extends AbstractTableModel {
         }
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static HighScoresData getInstance() {
         if (instance == null) {
             instance = new HighScoresData();
@@ -30,6 +38,13 @@ public class HighScoresData extends AbstractTableModel {
         return instance;
     }
 
+    /**
+     * Add score.
+     *
+     * @param playerName the player name
+     * @param diff       the diff
+     * @param time       the time
+     */
     public void addScore(String playerName, Difficulty diff, int time) {
         scores.add(new Score(playerName, diff, time));
         fireTableDataChanged();
@@ -85,10 +100,20 @@ public class HighScoresData extends AbstractTableModel {
         return (columnIndex > 1);
     }
 
+    /**
+     * Gets scores.
+     *
+     * @return the scores
+     */
     public List<Score> getScores() {
         return scores;
     }
 
+    /**
+     * Sets scores.
+     *
+     * @param scores the scores
+     */
     public void setScores(List<Score> scores) {
         this.scores = scores;
     }

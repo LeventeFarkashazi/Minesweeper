@@ -2,6 +2,9 @@ package minesweeper;
 
 import java.util.Random;
 
+/**
+ * The type Grid.
+ */
 public class Grid {
     private static Grid instance;
 
@@ -20,6 +23,11 @@ public class Grid {
         initMatrix();
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static Grid getInstance() {
         if (instance == null) {
             instance = new Grid();
@@ -27,7 +35,10 @@ public class Grid {
         return instance;
     }
 
-    //init the matrix:
+    /**
+     * Init matrix.
+     */
+//init the matrix:
     public void initMatrix() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -36,13 +47,25 @@ public class Grid {
         }
     }
 
-    //check if a tile is in the grid:
+    /**
+     * In grid boolean.
+     *
+     * @param x the x
+     * @param y the y
+     * @return the boolean
+     */
+//check if a tile is in the grid:
     public boolean inGrid(int x, int y) {
         return x <= width - 1 && x >= 0 && y <= height - 1 && y >= 0;
     }
 
 
-    //chose bombs randomly:
+    /**
+     * Put bombs.
+     *
+     * @param bombs the bombs
+     */
+//chose bombs randomly:
     public void putBombs(int bombs) {
         Random rn = new Random();
         int x;
@@ -60,7 +83,10 @@ public class Grid {
         }
     }
 
-    //calculate tile's number:
+    /**
+     * Check neighbours.
+     */
+//calculate tile's number:
     public void checkNeighbours() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -97,7 +123,14 @@ public class Grid {
         }
     }
 
-    //Returns number of bomb neighbours, -1 if tile is not visible
+    /**
+     * Get tile neighbours int.
+     *
+     * @param x the x
+     * @param y the y
+     * @return the int
+     */
+//Returns number of bomb neighbours, -1 if tile is not visible
     public int GetTileNeighbours(int x, int y) {
         if (grid[x][y].isVisible())
             return grid[x][y].getBombNeighbours();
@@ -105,24 +138,57 @@ public class Grid {
             return -1;
     }
 
+    /**
+     * Is tile flagged boolean.
+     *
+     * @param x the x
+     * @param y the y
+     * @return the boolean
+     */
     public boolean isTileFlagged(int x, int y) {
         return !grid[x][y].isVisible() && grid[x][y].isFlagged();
     }
 
+    /**
+     * Is tile marked boolean.
+     *
+     * @param x the x
+     * @param y the y
+     * @return the boolean
+     */
     public boolean isTileMarked(int x, int y) {
         return !grid[x][y].isVisible() && grid[x][y].isMarked();
     }
 
+    /**
+     * Is tile bomb boolean.
+     *
+     * @param x the x
+     * @param y the y
+     * @return the boolean
+     */
     public boolean isTileBomb(int x, int y) {
         return !grid[x][y].isVisible() && grid[x][y].isBomb();
     }
 
+    /**
+     * Remove tile bomb.
+     *
+     * @param x the x
+     * @param y the y
+     */
     public void removeTileBomb(int x, int y) {
         grid[x][y].setBomb(false);
     }
 
 
-    //reveal tiles recursively:
+    /**
+     * Reveal.
+     *
+     * @param x the x
+     * @param y the y
+     */
+//reveal tiles recursively:
     public void reveal(int x, int y) {
         if (grid[x][y].isBomb()) {
             grid[x][y].setVisible(true);
@@ -160,6 +226,12 @@ public class Grid {
         }
     }
 
+    /**
+     * Flag.
+     *
+     * @param x the x
+     * @param y the y
+     */
     public void flag(int x, int y) {
         if (grid[x][y].isFlagged()) {
             grid[x][y].setFlagged(false);
@@ -173,7 +245,10 @@ public class Grid {
         }
     }
 
-    //reveal all tiles (end of game):
+    /**
+     * Reveal all.
+     */
+//reveal all tiles (end of game):
     public void revealAll() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -182,15 +257,28 @@ public class Grid {
         }
     }
 
-    //resetTimer grid
+    /**
+     * Reset grid.
+     */
+//resetTimer grid
     public void resetGrid() {
         instance = new Grid();
     }
 
+    /**
+     * Gets revealed.
+     *
+     * @return the revealed
+     */
     public int getRevealed() {
         return revealed;
     }
 
+    /**
+     * Is exploded boolean.
+     *
+     * @return the boolean
+     */
     public boolean isExploded() {
         return exploded;
     }

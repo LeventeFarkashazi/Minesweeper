@@ -4,13 +4,20 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
+/**
+ * The type Win frame.
+ */
 public class WinFrame extends JFrame {
     private final Difficulty difficulty;
     private final int time;
     private String winnerName;
 
+    /**
+     * Instantiates a new Win frame.
+     */
     public WinFrame() {
         super("You Win!");
+        setResizable(false);
         ImageIcon img = new ImageIcon(System.getProperty("user.dir") + "\\src\\minesweeper.png");
         setIconImage(img.getImage());
 
@@ -26,7 +33,7 @@ public class WinFrame extends JFrame {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
-        Frame.GifPanel gifPanel = new Frame.GifPanel("\\src\\images\\youWin.gif", new Dimension(640, 360));
+        Frame.GifPanel gifPanel = new Frame.GifPanel("\\src\\images\\youWin.gif", 640, 360);
 
         JPanel namePanel = new JPanel();
         namePanel.add(new JLabel("Name:"));
