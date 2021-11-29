@@ -43,7 +43,7 @@ public class Grid {
     }
 
     /**
-     *Feltölti a grid mátrixot mezőkkel.
+     * Feltölti a grid mátrixot mezőkkel.
      */
     public void initMatrix() {
         for (int x = 0; x < width; x++) {
@@ -146,6 +146,7 @@ public class Grid {
 
     /**
      * Visszaadja, hogy az x és y koordinátákkal megadott mezőn található-e jelölő zászló.
+     *
      * @param x a lekérdezendő mező x koodinátája
      * @param y a lekérdezendő mező y koodinátája
      * @return van-e zászló az adott mezőn
@@ -156,6 +157,7 @@ public class Grid {
 
     /**
      * Visszaadja, hogy az x és y koordinátákkal megadott mezőn található-e jelölő kérdőjel.
+     *
      * @param x a lekérdezendő mező x koodinátája
      * @param y a lekérdezendő mező y koodinátája
      * @return van-e jelölő kérdőjel az adott mezőn
@@ -166,6 +168,7 @@ public class Grid {
 
     /**
      * Visszaadja, hogy az x és y koordinátákkal megadott mező bomba-e.
+     *
      * @param x a lekérdezendő mező x koodinátája
      * @param y a lekérdezendő mező y koodinátája
      * @return bomba-e az adott mező

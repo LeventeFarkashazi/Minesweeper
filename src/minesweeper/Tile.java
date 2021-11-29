@@ -34,7 +34,6 @@ public class Tile {
     }
 
     /**
-
      * Beállítja, hogy fel van-e fedve a mező.
      *
      * @param visible fel van-e fedve a mező

@@ -100,7 +100,7 @@ public class GameLogic {
     }
 
     /**
-     *A játék elvesztése. Megállítja az időzítőt és felfedi az összes mezőt, majd megjeleníti a gameOver ablakot.
+     * A játék elvesztése. Megállítja az időzítőt és felfedi az összes mezőt, majd megjeleníti a gameOver ablakot.
      */
     void gameOver() {
         Timer.getInstance().stop();

@@ -2,6 +2,7 @@ package minesweeper;
 
 /**
  * A játék main osztálya.
+ *
  * @author Farkasházi Levente
  */
 public class Main {

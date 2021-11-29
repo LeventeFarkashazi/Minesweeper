@@ -105,13 +105,13 @@ public class Frame extends JFrame {
          * Konstruktor.
          * Példányosítj a GifPanel-t.
          *
-         * @param path a megjelenítendő GIF/kép elérési útvonala
-         * @param width a megjelenítendő GIF/kép szélessége
+         * @param path   a megjelenítendő GIF/kép elérési útvonala
+         * @param width  a megjelenítendő GIF/kép szélessége
          * @param height a megjelenítendő GIF/kép magassága
          */
         public GifPanel(String path, int width, int height) {
             image = Toolkit.getDefaultToolkit().createImage(System.getProperty("user.dir") + path);
-            setPreferredSize(new Dimension(width,height));
+            setPreferredSize(new Dimension(width, height));
         }
 
         @Override

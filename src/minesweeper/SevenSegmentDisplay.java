@@ -10,8 +10,8 @@ import java.awt.image.BufferedImage;
 public class SevenSegmentDisplay {
     BufferedImage[] digits;
     JLabel digitLabel1,
-    digitLabel2,
-    digitLabel3;
+            digitLabel2,
+            digitLabel3;
     JPanel timerPanel;
 
     /**
