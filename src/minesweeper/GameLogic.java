@@ -6,14 +6,14 @@ package minesweeper;
  */
 public class GameLogic {
     private static GameLogic instance;
-    Grid grid;
-    Frame frame;
-    Difficulty difficulty = Difficulty.INTERMEDIATE;
+    private Grid grid;
+    private Difficulty difficulty = Difficulty.INTERMEDIATE;
     private boolean gameStarted;
 
     private int width = 16;
     private int height = 16;
     private int bombs = 30;
+    private Frame frame;
 
     /**
      * Visszadja az osztály egyetlen létező példányát.
@@ -29,7 +29,7 @@ public class GameLogic {
     }
 
     /**
-     * Inicializálja  a játékot
+     * Inicializálja  a játékot.
      */
     void initGame() {
         gameStarted = false;
@@ -93,7 +93,7 @@ public class GameLogic {
     /**
      * Visszaadja, hogy felrobbant e az aknamező valamelyik bombája.
      *
-     * @return felrobbant-e az aknamező
+     * @return felrobbant -e az aknamező
      */
     public boolean isExploded() {
         return grid.isExploded();
@@ -123,26 +123,6 @@ public class GameLogic {
     }
 
     /**
-     * A játék nehézségét állítja be. Beállítja a megadott nehézséghez tartozó játék attribútumokat.
-     *
-     * @param difficulty a beállítani kívánt nehézség
-     */
-    public void setDifficulty(Difficulty difficulty) {
-        if (difficulty != null) {
-            this.difficulty = difficulty;
-            switch (difficulty) {
-                case CRYBABY -> SetGameAttributes(9, 9, 5);
-                case EASY -> SetGameAttributes(9, 9, 10);
-                case INTERMEDIATE -> SetGameAttributes(16, 16, 40);
-                case OVERKILL -> SetGameAttributes(30, 16, 99);
-                case DEATH_WISH -> SetGameAttributes(60, 30, 300);
-                case FEELING_LUCKY -> SetGameAttributes(40, 25, 40 * 25 - 2);
-                case SZOFTTECH -> SetGameAttributes(16, 16, 16 * 16);
-            }
-        }
-    }
-
-    /**
      * Visszatér az aknamező szélességeével.
      *
      * @return a mező szélessége
@@ -167,5 +147,61 @@ public class GameLogic {
      */
     public int getBombs() {
         return bombs;
+    }
+
+    /**
+     * Visszatér az aknamező adatait tároló grid példányával.
+     *
+     * @return a grid példányával
+     */
+    public Grid getGrid() {
+        return grid;
+    }
+
+    /**
+     * Visszatér a játékot megjelenítő ablak pédánnyal.
+     *
+     * @return a játékot megjelenítő ablak pédánny
+     */
+    public Frame getFrame() {
+        return frame;
+    }
+
+    /**
+     * Visszatér a játék aktuális .
+     *
+     * @return the difficulty
+     */
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    /**
+     * A játék nehézségét állítja be. Beállítja a megadott nehézséghez tartozó játék attribútumokat.
+     *
+     * @param difficulty a beállítani kívánt nehézség
+     */
+    public void setDifficulty(Difficulty difficulty) {
+        if (difficulty != null) {
+            this.difficulty = difficulty;
+            switch (difficulty) {
+                case CRYBABY -> SetGameAttributes(9, 9, 5);
+                case EASY -> SetGameAttributes(9, 9, 10);
+                case INTERMEDIATE -> SetGameAttributes(16, 16, 40);
+                case OVERKILL -> SetGameAttributes(30, 16, 99);
+                case DEATH_WISH -> SetGameAttributes(60, 30, 300);
+                case FEELING_LUCKY -> SetGameAttributes(40, 25, 40 * 25 - 2);
+                case SZOFTTECH -> SetGameAttributes(16, 16, 16 * 16);
+            }
+        }
+    }
+
+    /**
+     * Is game started boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isGameStarted() {
+        return gameStarted;
     }
 }

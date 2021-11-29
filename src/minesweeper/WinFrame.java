@@ -25,7 +25,7 @@ public class WinFrame extends JFrame {
         setIconImage(img.getImage());
 
         //set arguments
-        difficulty = GameLogic.getInstance().difficulty;
+        difficulty = GameLogic.getInstance().getDifficulty();
         time = Timer.getInstance().getSeconds();
 
         //init components
