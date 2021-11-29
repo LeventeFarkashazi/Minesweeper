@@ -30,9 +30,9 @@ public class WinFrame extends JFrame {
 
         //init components
         initComponents();
-        setLocationRelativeTo(null);
         setAlwaysOnTop(true);
         pack();
+        setLocationRelativeTo(null);
     }
 
     /**
