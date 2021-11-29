@@ -5,39 +5,30 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * The type Seven segment display.
+ * A játékban használt 3 számjegyes 7 szegmenses kijelzőt megvalósító osztály.
  */
 public class SevenSegmentDisplay {
-    /**
-     * The Digits.
-     */
     BufferedImage[] digits;
-    /**
-     * The Digit label 1.
-     */
-    JLabel digitLabel1, /**
-     * The Digit label 2.
-     */
-    digitLabel2, /**
-     * The Digit label 3.
-     */
+    JLabel digitLabel1,
+    digitLabel2,
     digitLabel3;
-    /**
-     * The Timer panel.
-     */
     JPanel timerPanel;
 
     /**
-     * Instantiates a new Seven segment display.
+     * Konstruktor.
+     * Példányosítj a kijelzőt.
+     * Beállítja a példány attribútumait és inicializálja a kijelzőt a megadott értéknek megfelelően.
      *
-     * @param timerPanel       the timer panel
-     * @param initDisplayValue the init display value
+     * @param timerPanel       a panel amin meg kell jeleníteni a kijelzőt
+     * @param initDisplayValue a kijelző kezdeti értéke
      */
     SevenSegmentDisplay(JPanel timerPanel, int initDisplayValue) {
         timerPanel.setBorder(BorderFactory.createMatteBorder(12, 12, 12, 12, Color.LIGHT_GRAY));
         this.timerPanel = timerPanel;
+        //get the digit images
         digits = ImageReader.getInstance().getDigits();
 
+        //init with initDisplayValue
         String digitString = String.format("%03d", Math.min(initDisplayValue, 999));
         digitLabel1 = new JLabel(new ImageIcon(digits[Character.getNumericValue(digitString.charAt(0))]));
         timerPanel.add(digitLabel1);
@@ -48,11 +39,12 @@ public class SevenSegmentDisplay {
     }
 
     /**
-     * Draw digits.
+     * A megadott displayValue-nek megfelelően állítja be a kijelző számjegyeit, azaz frissíti a kijelző számjegyeit.
      *
-     * @param displayValue the display value
+     * @param displayValue a kijelzőnek beállítandó érték
      */
     public void drawDigits(int displayValue) {
+        //max 999
         String digitString = String.format("%03d", Math.min(displayValue, 999));
         digitLabel1.setIcon(new ImageIcon(digits[Character.getNumericValue(digitString.charAt(0))]));
         digitLabel2.setIcon(new ImageIcon(digits[Character.getNumericValue(digitString.charAt(1))]));
@@ -60,7 +52,7 @@ public class SevenSegmentDisplay {
     }
 
     /**
-     * Display inactive.
+     * Beállítja a kijelző minden számjegyét az inaktív állapotnak megfelelőre, azaz 3db (-) karakterre.
      */
     public void displayInactive() {
         digitLabel1.setIcon(new ImageIcon(digits[10]));

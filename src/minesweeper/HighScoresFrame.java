@@ -9,42 +9,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type High scores frame.
+ * A dicsőséglistát megjelenítő ablak.
  */
 public class HighScoresFrame extends JFrame {
-
-    /**
-     * The Table.
-     */
     static JTable table;
     private final HighScoresData data;
 
     /**
-     * Instantiates a new High scores frame.
+     * Konstruktor.
+     * Példányosítja az ablakot, beállítja az attribútumait.
      */
     public HighScoresFrame() {
+        //set window properties
         super("High Scores");
         ImageIcon img = new ImageIcon(System.getProperty("user.dir") + "\\src\\minesweeper.png");
         setIconImage(img.getImage());
 
+        //HighScoresData
         data = HighScoresData.getInstance();
+
+        //init components
         initComponents();
         pack();
         setSize(new Dimension(500, 500));
         setLocationRelativeTo(null);
     }
 
+    /**
+     * Inicializálja az ablak komponenseit.
+     */
     private void initComponents() {
         this.setLayout(new BorderLayout());
 
+        //Jatble
         table = new JTable(data);
         table.setFillsViewportHeight(true);
 
+        //set width
         table.getColumnModel().getColumn(0).setPreferredWidth(500 / 2);
         table.getColumnModel().getColumn(1).setPreferredWidth(500 / 3);
         table.getColumnModel().getColumn(2).setPreferredWidth(500 / 6);
 
-        //Sort
+        //sort
         table.setRowSorter(new TableRowSorter<>(data));
 
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
@@ -57,7 +63,7 @@ public class HighScoresFrame extends JFrame {
         sorter.setSortKeys(sortKeys);
         sorter.sort();
 
-        //Render
+        //set renderers
         table.setDefaultRenderer(String.class, new ScoreTableCellRenderer(table.getDefaultRenderer(String.class)));
         table.setDefaultRenderer(Enum.class, new ScoreTableCellRenderer(table.getDefaultRenderer(Enum.class)));
         table.setDefaultRenderer(Integer.class, new ScoreTableCellRenderer(table.getDefaultRenderer(Integer.class)));
@@ -89,23 +95,26 @@ public class HighScoresFrame extends JFrame {
     }
 
     /**
-     * The type Score table cell renderer.
+     * A renderelésért felelős osztály.
      */
     static class ScoreTableCellRenderer implements TableCellRenderer {
         private final TableCellRenderer renderer;
 
         /**
-         * Instantiates a new Score table cell renderer.
+         * Konstruktor.
+         * Példányosítja a renderer-t.
          *
-         * @param defRenderer the def renderer
+         * @param defRenderer az adott adattípus default renderer-je
          */
         public ScoreTableCellRenderer(TableCellRenderer defRenderer) {
+            //"fancy" rendering for the Enum class (uses String default renderer)
             if (defRenderer == table.getDefaultRenderer(Enum.class)) {
                 this.renderer = table.getDefaultRenderer(String.class);
             } else
                 this.renderer = defRenderer;
         }
 
+        @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             return renderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         }

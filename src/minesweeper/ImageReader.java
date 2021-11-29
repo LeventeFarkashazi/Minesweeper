@@ -6,22 +6,28 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * The type Image reader.
+ * A játék kirajzolásához használt képeket beolvasásáért és tárolásáért felelős osztály.
+ * Csak egy példánya lehet, azaz singleton.
  */
 public class ImageReader {
     private static ImageReader instance;
     private BufferedImage[] digits;
     private BufferedImage[] images;
 
+    /**
+     * Konstruktor.
+     * Példányosítja az osztályt és meghívja a képeket beolvasó függvényeket.
+     */
     private ImageReader() {
         readDigits();
         readPictures();
     }
 
     /**
-     * Gets instance.
+     * Visszadja az osztály egyetlen létező példányát.
+     * Ha az osztálynak még nem létezik példánya, létrehoz egyet.
      *
-     * @return the instance
+     * @return az osztály példánya
      */
     public static ImageReader getInstance() {
         if (instance == null) {
@@ -31,7 +37,7 @@ public class ImageReader {
     }
 
     /**
-     * Read digits.
+     * Beolvassa a számlálókhoz használt számjegyek képeit.
      */
     public void readDigits() {
         digits = new BufferedImage[11];
@@ -45,7 +51,7 @@ public class ImageReader {
     }
 
     /**
-     * Read pictures.
+     * Beolvassa az aknamező mezőjinek kirajzolásához használt képeket.
      */
     public void readPictures() {
         images = new BufferedImage[13];
@@ -59,18 +65,18 @@ public class ImageReader {
     }
 
     /**
-     * Get digits buffered image [ ].
+     * Visszatér a számlálókhoz használt számjegyek képeit tartalmazó tömbbel.
      *
-     * @return the buffered image [ ]
+     * @return a számjegyek képei
      */
     public BufferedImage[] getDigits() {
         return digits;
     }
 
     /**
-     * Get images buffered image [ ].
+     * Visszatér az aknamező mezőinek kirajzolásához használt képeket tartalmazó tömbbel.
      *
-     * @return the buffered image [ ]
+     * @return a mezők képei
      */
     public BufferedImage[] getImages() {
         return images;

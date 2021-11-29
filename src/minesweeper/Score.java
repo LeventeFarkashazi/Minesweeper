@@ -3,32 +3,32 @@ package minesweeper;
 import java.io.Serializable;
 
 /**
- * The type Score.
+ * Az adatok tárolásához használt adategység. Minden példánya egy rekordot reprezentál.
  */
 public record Score(String playerName, Difficulty diff, int time) implements Serializable {
 
     /**
-     * Gets player name.
+     * Visszaadja a játékos nevét.
      *
-     * @return the player name
+     * @return a játékos neve
      */
     public String getPlayerName() {
         return playerName;
     }
 
     /**
-     * Gets diff.
+     * Visszaadja a játék nehézségi szintjét.
      *
-     * @return the diff
+     * @return a játék nehézségi szintje
      */
     public Difficulty getDiff() {
         return diff;
     }
 
     /**
-     * Gets time.
+     * Visszaadja a játék hosszát másodpercben.
      *
-     * @return the time
+     * @return a játék hossza (mp).
      */
     public int getTime() {
         return time;

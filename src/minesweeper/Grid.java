@@ -3,7 +3,9 @@ package minesweeper;
 import java.util.Random;
 
 /**
- * The type Grid.
+ * Az aknamezőt reprezentáló osztály.
+ * pozíció szerint tárolja az egyes mezőket és felelős a rajtuk elvégzett műveletekért és az állapotuk lekérdezéséért.
+ * Csak egy példánya lehet, azaz singleton osztály.
  */
 public class Grid {
     private static Grid instance;
@@ -14,6 +16,10 @@ public class Grid {
     private int revealed;
     private boolean exploded;
 
+    /**
+     * Konstruktor.
+     * Példányosítj a grid-et és meghívja a mátrixot inicializáló függvényt.
+     */
     private Grid() {
         width = GameLogic.getInstance().getWidth();
         height = GameLogic.getInstance().getHeight();
@@ -24,9 +30,10 @@ public class Grid {
     }
 
     /**
-     * Gets instance.
+     * Visszadja a grid egyetlen létező példányát.
+     * Ha az osztálynak még nem létezik példánya, létrehoz egyet.
      *
-     * @return the instance
+     * @return a grid példánya
      */
     public static Grid getInstance() {
         if (instance == null) {
@@ -36,9 +43,8 @@ public class Grid {
     }
 
     /**
-     * Init matrix.
+     *Feltölti a grid mátrixot mezőkkel.
      */
-//init the matrix:
     public void initMatrix() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -48,24 +54,23 @@ public class Grid {
     }
 
     /**
-     * In grid boolean.
+     * Ellenőrzi, hogy egy koordináta benne van e a mátrixban.
      *
-     * @param x the x
-     * @param y the y
-     * @return the boolean
+     * @param x a lekérdezendő mező x koordinátája
+     * @param y a lekérdezendő mező y koordinátája
+     * @return benne van-e a koordináta a mátrixban
      */
-//check if a tile is in the grid:
     public boolean inGrid(int x, int y) {
         return x <= width - 1 && x >= 0 && y <= height - 1 && y >= 0;
     }
 
 
     /**
-     * Put bombs.
+     * Egyenletesen random módon elhelyez bombs darab bombát a mezőn.
+     * Ellenőrzi, hogy a random kiválasztott mezőn van e már bomba, ekkor újra kiválaszt egy random mezőt.
      *
-     * @param bombs the bombs
+     * @param bombs az elhelyezendő bombák száma
      */
-//chose bombs randomly:
     public void putBombs(int bombs) {
         Random rn = new Random();
         int x;
@@ -84,37 +89,38 @@ public class Grid {
     }
 
     /**
-     * Check neighbours.
+     * Mezőnként kiszámolja és beállítja a szomszédos mezőkön található bombák számát.
+     * ha a mező bomba, akkor a szomszédos bombák számát 9-re állítja (lehetetlen érték...).
      */
-//calculate tile's number:
     public void checkNeighbours() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 grid[x][y].setBombNeighbours(0);
                 if (!grid[x][y].isBomb()) {
+                    //check the neighbours in every direction
                     if (inGrid(x + 1, y + 1) && grid[x + 1][y + 1].isBomb()) {
-                        grid[x][y].AddBombNeighbour(1);
+                        grid[x][y].AddBombNeighbour();
                     }
                     if (inGrid(x + 1, y) && grid[x + 1][y].isBomb()) {
-                        grid[x][y].AddBombNeighbour(1);
+                        grid[x][y].AddBombNeighbour();
                     }
                     if (inGrid(x + 1, y - 1) && grid[x + 1][y - 1].isBomb()) {
-                        grid[x][y].AddBombNeighbour(1);
+                        grid[x][y].AddBombNeighbour();
                     }
                     if (inGrid(x, y + 1) && grid[x][y + 1].isBomb()) {
-                        grid[x][y].AddBombNeighbour(1);
+                        grid[x][y].AddBombNeighbour();
                     }
                     if (inGrid(x, y - 1) && grid[x][y - 1].isBomb()) {
-                        grid[x][y].AddBombNeighbour(1);
+                        grid[x][y].AddBombNeighbour();
                     }
                     if (inGrid(x - 1, y + 1) && grid[x - 1][y + 1].isBomb()) {
-                        grid[x][y].AddBombNeighbour(1);
+                        grid[x][y].AddBombNeighbour();
                     }
                     if (inGrid(x - 1, y) && grid[x - 1][y].isBomb()) {
-                        grid[x][y].AddBombNeighbour(1);
+                        grid[x][y].AddBombNeighbour();
                     }
                     if (inGrid(x - 1, y - 1) && grid[x - 1][y - 1].isBomb()) {
-                        grid[x][y].AddBombNeighbour(1);
+                        grid[x][y].AddBombNeighbour();
                     }
                 } else {
                     grid[x][y].setBombNeighbours(9);
@@ -124,13 +130,13 @@ public class Grid {
     }
 
     /**
-     * Get tile neighbours int.
+     * Visszaadja az x és y koordinátákkal megadott mező bomba szomszéedainak számát.
+     * -1-ae ad vissza, ha a mező még nem lett felfedve.
      *
-     * @param x the x
-     * @param y the y
-     * @return the int
+     * @param x a lekérdezendő mező x koodinátája
+     * @param y a lekérdezendő mező y koodinátája
+     * @return a bomba szomszédok száma
      */
-//Returns number of bomb neighbours, -1 if tile is not visible
     public int GetTileNeighbours(int x, int y) {
         if (grid[x][y].isVisible())
             return grid[x][y].getBombNeighbours();
@@ -139,66 +145,69 @@ public class Grid {
     }
 
     /**
-     * Is tile flagged boolean.
-     *
-     * @param x the x
-     * @param y the y
-     * @return the boolean
+     * Visszaadja, hogy az x és y koordinátákkal megadott mezőn található-e jelölő zászló.
+     * @param x a lekérdezendő mező x koodinátája
+     * @param y a lekérdezendő mező y koodinátája
+     * @return van-e zászló az adott mezőn
      */
     public boolean isTileFlagged(int x, int y) {
         return !grid[x][y].isVisible() && grid[x][y].isFlagged();
     }
 
     /**
-     * Is tile marked boolean.
-     *
-     * @param x the x
-     * @param y the y
-     * @return the boolean
+     * Visszaadja, hogy az x és y koordinátákkal megadott mezőn található-e jelölő kérdőjel.
+     * @param x a lekérdezendő mező x koodinátája
+     * @param y a lekérdezendő mező y koodinátája
+     * @return van-e jelölő kérdőjel az adott mezőn
      */
     public boolean isTileMarked(int x, int y) {
         return !grid[x][y].isVisible() && grid[x][y].isMarked();
     }
 
     /**
-     * Is tile bomb boolean.
-     *
-     * @param x the x
-     * @param y the y
-     * @return the boolean
+     * Visszaadja, hogy az x és y koordinátákkal megadott mező bomba-e.
+     * @param x a lekérdezendő mező x koodinátája
+     * @param y a lekérdezendő mező y koodinátája
+     * @return bomba-e az adott mező
      */
     public boolean isTileBomb(int x, int y) {
         return !grid[x][y].isVisible() && grid[x][y].isBomb();
     }
 
     /**
-     * Remove tile bomb.
+     * Leveszi a bombát az x és y koordinátákkal megadott mezőről.
      *
-     * @param x the x
-     * @param y the y
+     * @param x a módosítandó mező x koodinátája
+     * @param y a módosítandó mező y koodinátája
      */
     public void removeTileBomb(int x, int y) {
         grid[x][y].setBomb(false);
     }
 
-
     /**
-     * Reveal.
+     * Rekurzív függvény, ami feloldja az x és y koordinátákkal megadott mezőt.
+     * Ha egy mezőnek 0 db szomszédja van, akkor a körülötte lévő mezőkre rekurzívan meghívódik a függvényt.
+     * A zászlóval mefjelölt mezők nem oldódnak föl.
      *
-     * @param x the x
-     * @param y the y
+     * @param x a feloldandó mező x koodinátája
+     * @param y a feloldandó mező y koodinátája
      */
-//reveal tiles recursively:
     public void reveal(int x, int y) {
+        //if the revealed tile is bomb
         if (grid[x][y].isBomb()) {
             grid[x][y].setVisible(true);
             exploded = true;
-        } else if (grid[x][y].getBombNeighbours() != 0 && !grid[x][y].isFlagged()) {
+        }
+        //else if the revealed tile has more than 0 neighbours and not flagged
+        else if (grid[x][y].getBombNeighbours() != 0 && !grid[x][y].isFlagged()) {
             grid[x][y].setVisible(true);
             revealed++;
-        } else if (grid[x][y].getBombNeighbours() == 0 && !grid[x][y].isFlagged()) {
+        }
+        //if the revealed tile has 0 neighbours and not flagged
+        else if (grid[x][y].getBombNeighbours() == 0 && !grid[x][y].isFlagged()) {
             grid[x][y].setVisible(true);
             revealed++;
+            //recursive call if the neighbour is in the grid, not visible and not flagged
             if (inGrid(x + 1, y + 1) && !grid[x + 1][y + 1].isVisible() && !grid[x][y].isFlagged()) {
                 reveal(x + 1, y + 1);
             }
@@ -227,28 +236,34 @@ public class Grid {
     }
 
     /**
-     * Flag.
+     * Zászlót helyez az x és y koordinátákkal megadott mezőre.
+     * Ha a mezőn már van zászló akkor leveszi és helyére kérdőjelet rak.
+     * Ha a mezőn kérdőjel van akkor leveszi azt.
      *
      * @param x the x
      * @param y the y
      */
     public void flag(int x, int y) {
+        //flagged->marked
         if (grid[x][y].isFlagged()) {
             grid[x][y].setFlagged(false);
             FlagCounter.getInstance().increment();
             grid[x][y].setMarked(true);
-        } else if (grid[x][y].isMarked()) {
+        }
+        //marked->empty
+        else if (grid[x][y].isMarked()) {
             grid[x][y].setMarked(false);
-        } else if (FlagCounter.getInstance().getRemainingFlags() > 0) {
+        }
+        //empty->flagged
+        else if (FlagCounter.getInstance().getRemainingFlags() > 0) {
             grid[x][y].setFlagged(true);
             FlagCounter.getInstance().decrement();
         }
     }
 
     /**
-     * Reveal all.
+     * Felfedi a gridben található összes mezőt.
      */
-//reveal all tiles (end of game):
     public void revealAll() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -258,26 +273,25 @@ public class Grid {
     }
 
     /**
-     * Reset grid.
+     * Alaphelyzetbe állítja a gridet (gyakorlatilag létrehoz egy új példányt).
      */
-//resetTimer grid
     public void resetGrid() {
         instance = new Grid();
     }
 
     /**
-     * Gets revealed.
+     * Visszatér a már felfedett mezők számával.
      *
-     * @return the revealed
+     * @return a felfedett mezők száma
      */
     public int getRevealed() {
         return revealed;
     }
 
     /**
-     * Is exploded boolean.
+     * Visszaadja, hogy felrobban-e az aknamező.
      *
-     * @return the boolean
+     * @return felrobban-e az aknamező
      */
     public boolean isExploded() {
         return exploded;

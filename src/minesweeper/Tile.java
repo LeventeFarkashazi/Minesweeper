@@ -1,7 +1,7 @@
 package minesweeper;
 
 /**
- * The type Tile.
+ * Az aknamező egy mezőjét reprezentálja.
  */
 public class Tile {
     private boolean bomb;
@@ -11,11 +11,12 @@ public class Tile {
     private boolean marked;
 
     /**
-     * Instantiates a new Tile.
+     * Konstruktor.
+     * Példányosítja a mezőt a megadott paraméterekkel.
      *
-     * @param isBomb         the is bomb
-     * @param isVisible      the is visible
-     * @param bombNeighbours the bomb neighbours
+     * @param isBomb         bomba-e a mező
+     * @param isVisible      fel van-e fedve a mező
+     * @param bombNeighbours a mező bomba szomszédainak száma
      */
     Tile(boolean isBomb, boolean isVisible, int bombNeighbours) {
         this.bomb = isBomb;
@@ -24,99 +25,98 @@ public class Tile {
     }
 
     /**
-     * Is visible boolean.
+     * Visszaadja, hogy fel van-e fedve a mező.
      *
-     * @return the boolean
+     * @return fel van-e fedve a mező
      */
     public boolean isVisible() {
         return visible;
     }
 
     /**
-     * Sets visible.
+
+     * Beállítja, hogy fel van-e fedve a mező.
      *
-     * @param visible the visible
+     * @param visible fel van-e fedve a mező
      */
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
 
     /**
-     * Gets bomb neighbours.
+     * Visszaadja, hogy hány bomba szomszédja van a mezőnek.
      *
-     * @return the bomb neighbours
+     * @return a mező bomba szomszédainak száma
      */
     public int getBombNeighbours() {
         return bombNeighbours;
     }
 
     /**
-     * Sets bomb neighbours.
+     * Beállítja, hogy hány bomba szomszédja van a mezőnek.
      *
-     * @param n the n
+     * @param n a mező bomba szomszédainak száma
      */
     public void setBombNeighbours(int n) {
         this.bombNeighbours = n;
     }
 
     /**
-     * Add bomb neighbour.
-     *
-     * @param n the n
+     * Egyet ad a mező bomba szomszédainak számához.
      */
-    public void AddBombNeighbour(int n) {
-        this.bombNeighbours += n;
+    public void AddBombNeighbour() {
+        this.bombNeighbours++;
     }
 
     /**
-     * Is bomb boolean.
+     * Visszaadja, hogy bomba-e a mező.
      *
-     * @return the boolean
+     * @return bomba-e a mező
      */
     public boolean isBomb() {
         return bomb;
     }
 
     /**
-     * Sets bomb.
+     * Beállítja, hogy bomba-e a mező.
      *
-     * @param bomb the bomb
+     * @param bomb bomba-e a mező
      */
     public void setBomb(boolean bomb) {
         this.bomb = bomb;
     }
 
     /**
-     * Is flagged boolean.
+     * Visszaadja, hogy zászlóval jelölt-e a mező.
      *
-     * @return the boolean
+     * @return zászlóval jelölt-e a mező
      */
     public boolean isFlagged() {
         return flagged;
     }
 
     /**
-     * Sets flagged.
+     * Beállítja, hogy zászlóval jelölt-e a mező.
      *
-     * @param flagged the flagged
+     * @param flagged zászlóval jelölt-e a mező
      */
     public void setFlagged(boolean flagged) {
         this.flagged = flagged;
     }
 
     /**
-     * Is marked boolean.
+     * Visszaadja, hogy kérdőjellel jelölt-e a mező.
      *
-     * @return the boolean
+     * @return kérdőjellel jelölt-e a mező
      */
     public boolean isMarked() {
         return marked;
     }
 
     /**
-     * Sets marked.
+     * Beállítja, hogy kérdőjellel jelölt-e a mező.
      *
-     * @param marked the marked
+     * @param marked kérdőjellel jelölt-e a mező
      */
     public void setMarked(boolean marked) {
         this.marked = marked;

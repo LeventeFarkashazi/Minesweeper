@@ -4,29 +4,31 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * The type Timer.
+ * A játékban található idő számláló panel.
+ * Csak egy példánya lehet, azaz singleton osztály.
  */
 class Timer extends JPanel {
     private static Timer instance;
     private final Runnable counter;
-    /**
-     * The Seconds.
-     */
     int seconds;
-    /**
-     * The Display.
-     */
     SevenSegmentDisplay display;
     private boolean running;
 
+    /**
+     * Konstruktor.
+     * Példányosítja a játékban található idő számláló panelt.
+     * Beállítja a számláló értékét 0-ra. Létrehozza a counter Runnable-t.
+     */
     private Timer() {
         seconds = 0;
         setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
         display = new SevenSegmentDisplay(this, 0);
         display.displayInactive();
 
+        //runnable
         counter = () -> {
             while (running) {
+                //tick
                 seconds++;
                 drawTimer();
                 try {
@@ -39,9 +41,10 @@ class Timer extends JPanel {
     }
 
     /**
-     * Gets instance.
+     * Visszadja az idő számláló panel egyetlen létező példányát.
+     * Ha az osztálynak még nem létezik példánya, létrehoz egyet.
      *
-     * @return the instance
+     * @return a számláló példánya
      */
     public static Timer getInstance() {
         if (instance == null) {
@@ -50,21 +53,15 @@ class Timer extends JPanel {
         return instance;
     }
 
+    /**
+     * Frissíti az időt kirajzoló kijelzőt az aktuális seconds értékkel.
+     */
     private void drawTimer() {
         display.drawDigits(seconds);
     }
 
     /**
-     * Is killed boolean.
-     *
-     * @return the boolean
-     */
-    public boolean isKilled() {
-        return !running;
-    }
-
-    /**
-     * Start.
+     * Elindítja a számlálót. Létrehoz egy új Thread-et aminek átadja a countert, majd elindítja.
      */
     public void start() {
         running = true;
@@ -72,7 +69,7 @@ class Timer extends JPanel {
     }
 
     /**
-     * Stop.
+     * Megállítja a számlálót.
      */
     public void stop() {
         running = false;
@@ -80,7 +77,7 @@ class Timer extends JPanel {
     }
 
     /**
-     * Reset timer.
+     * Újraindítja a számlálót. Gyakorlatilag készít belőle egy új példányt.
      */
     public void resetTimer() {
         instance = new Timer();
@@ -88,9 +85,9 @@ class Timer extends JPanel {
     }
 
     /**
-     * Gets seconds.
+     * Visszaadja sz indítás óta eltelt másodpercek számát.
      *
-     * @return the seconds
+     * @return eltelt másodpercek
      */
     public int getSeconds() {
         return seconds;

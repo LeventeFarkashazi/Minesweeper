@@ -12,6 +12,7 @@ public class GameOverFrame extends JFrame {
     /**
      * Konstruktor.
      * Példányosítj az ablakot.
+     * Beállítja az ablak attribútumait és meghívja a komponenseket inicializáló függvényt.
      */
     public GameOverFrame() {
         //set window properties
@@ -19,12 +20,17 @@ public class GameOverFrame extends JFrame {
         setResizable(false);
         ImageIcon img = new ImageIcon(System.getProperty("user.dir") + "\\src\\minesweeper.png");
         setIconImage(img.getImage());
-        setLocationRelativeTo(null);
         setAlwaysOnTop(true);
 
+        //init components
         initComponents();
+        pack();
+        setLocationRelativeTo(null);
     }
 
+    /**
+     * Inicializálja a megjelenítendő paneleket.
+     */
     private void initComponents() {
         //content pane
         JPanel mainPanel = new JPanel();
@@ -41,12 +47,9 @@ public class GameOverFrame extends JFrame {
 
         //GIF panel
         Frame.GifPanel gifPanel = new Frame.GifPanel("\\src\\images\\gameOver.gif", 640, 360);
-        gifPanel.setBorder(new EmptyBorder(12, 12, 0, 12));
 
         //add the panels
         mainPanel.add(gifPanel, BorderLayout.CENTER);
         mainPanel.add(closePanel, BorderLayout.SOUTH);
-
-        pack();
     }
 }

@@ -1,14 +1,14 @@
 package minesweeper;
 
 /**
- * The Main class.
+ * A játék main osztálya.
  * @author Farkasházi Levente
  */
 public class Main {
     /**
-     * The entry point of application.
+     * A játék belépési pontja.
      *
-     * @param args the input arguments
+     * @param args parancssori argumentumok
      */
     public static void main(String[] args) {
         GameLogic.getInstance().initGame();
