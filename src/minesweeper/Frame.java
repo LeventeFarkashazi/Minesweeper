@@ -3,15 +3,9 @@ package minesweeper;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * A játékot megjelenítő ablak.
- */
 public class Frame extends JFrame {
     private final GameLogic gameLogic;
 
-    /**
-     * Az új ablak példányosítása.
-     */
     Frame() {
         gameLogic = GameLogic.getInstance();
 
@@ -50,9 +44,6 @@ public class Frame extends JFrame {
         setVisible(true);
     }
 
-    /**
-     * A az ablak menüjének inicializálása.
-     */
     public void initMenu() {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Game");
@@ -91,24 +82,10 @@ public class Frame extends JFrame {
         menu.add(highScores);
     }
 
-    /**
-     * GIF-ek megjelenítésére szolgáló panel.
-     */
     static class GifPanel extends JPanel {
 
-        /**
-         * A megjelenítendő GIF/kép
-         */
         Image image;
 
-        /**
-         * Konstruktor.
-         * Példányosítj a GifPanel-t.
-         *
-         * @param path   a megjelenítendő GIF/kép elérési útvonala
-         * @param width  a megjelenítendő GIF/kép szélessége
-         * @param height a megjelenítendő GIF/kép magassága
-         */
         public GifPanel(String path, int width, int height) {
             image = Toolkit.getDefaultToolkit().createImage(System.getProperty("user.dir") + path);
             setPreferredSize(new Dimension(width, height));

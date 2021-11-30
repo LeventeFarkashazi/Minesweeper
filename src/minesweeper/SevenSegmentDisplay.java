@@ -4,9 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-/**
- * A játékban használt 3 számjegyes 7 szegmenses kijelzőt megvalósító osztály.
- */
 public class SevenSegmentDisplay {
     BufferedImage[] digits;
     JLabel digitLabel1,
@@ -14,14 +11,6 @@ public class SevenSegmentDisplay {
             digitLabel3;
     JPanel timerPanel;
 
-    /**
-     * Konstruktor.
-     * Példányosítj a kijelzőt.
-     * Beállítja a példány attribútumait és inicializálja a kijelzőt a megadott értéknek megfelelően.
-     *
-     * @param timerPanel       a panel amin meg kell jeleníteni a kijelzőt
-     * @param initDisplayValue a kijelző kezdeti értéke
-     */
     SevenSegmentDisplay(JPanel timerPanel, int initDisplayValue) {
         timerPanel.setBorder(BorderFactory.createMatteBorder(12, 12, 12, 12, Color.LIGHT_GRAY));
         this.timerPanel = timerPanel;
@@ -38,11 +27,6 @@ public class SevenSegmentDisplay {
         timerPanel.add(digitLabel3);
     }
 
-    /**
-     * A megadott displayValue-nek megfelelően állítja be a kijelző számjegyeit, azaz frissíti a kijelző számjegyeit.
-     *
-     * @param displayValue a kijelzőnek beállítandó érték
-     */
     public void drawDigits(int displayValue) {
         //max 999
         String digitString = String.format("%03d", Math.min(displayValue, 999));
@@ -51,9 +35,6 @@ public class SevenSegmentDisplay {
         digitLabel3.setIcon(new ImageIcon(digits[Character.getNumericValue(digitString.charAt(2))]));
     }
 
-    /**
-     * Beállítja a kijelző minden számjegyét az inaktív állapotnak megfelelőre, azaz 3db (-) karakterre.
-     */
     public void displayInactive() {
         digitLabel1.setIcon(new ImageIcon(digits[10]));
         digitLabel2.setIcon(new ImageIcon(digits[10]));

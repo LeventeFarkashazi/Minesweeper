@@ -8,19 +8,11 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A dicsőséglista adatait tároló és kezelő osztály.
- * Csak egy példánya lehet, azaz singleton.
- */
 public class HighScoresData extends AbstractTableModel {
     private static HighScoresData instance;
 
     private List<Score> scores = new ArrayList<>();
 
-    /**
-     * Konstruktor.
-     * Példányosítja az osztályt és beolvassa az adatokat a scores file-ból.
-     */
     private HighScoresData() {
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream("scores.dat"));
@@ -31,12 +23,6 @@ public class HighScoresData extends AbstractTableModel {
         }
     }
 
-    /**
-     * Visszadja az osztály egyetlen létező példányát.
-     * Ha az osztálynak még nem létezik példánya, létrehoz egyet.
-     *
-     * @return az osztály példánya
-     */
     public static HighScoresData getInstance() {
         if (instance == null) {
             instance = new HighScoresData();
@@ -44,13 +30,6 @@ public class HighScoresData extends AbstractTableModel {
         return instance;
     }
 
-    /**
-     * Hozzáad egy új rekordot a dicsőséglistához és a scores file-ba írja
-     *
-     * @param playerName a játékos neve
-     * @param diff       a játék aktuális nehézségi szintje
-     * @param time       a játékos időeredménye
-     */
     public void addScore(String playerName, Difficulty diff, int time) {
         scores.add(new Score(playerName, diff, time));
         fireTableDataChanged();
@@ -106,11 +85,6 @@ public class HighScoresData extends AbstractTableModel {
         return (columnIndex > 1);
     }
 
-    /**
-     * Visszatér a dicsőséglista elemeit tároló listával.
-     *
-     * @return a dicsőséglista elemeit tároló lista
-     */
     public List<Score> getScores() {
         return scores;
     }

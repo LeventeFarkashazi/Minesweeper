@@ -4,16 +4,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-/**
- * A játék elvesztésekor megjelenő ablak.
- */
 public class GameOverFrame extends JFrame {
 
-    /**
-     * Konstruktor.
-     * Példányosítj az ablakot.
-     * Beállítja az ablak attribútumait és meghívja a komponenseket inicializáló függvényt.
-     */
     public GameOverFrame() {
         //set window properties
         super("Game Over!");
@@ -28,9 +20,6 @@ public class GameOverFrame extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    /**
-     * Inicializálja a megjelenítendő paneleket.
-     */
     private void initComponents() {
         //content pane
         JPanel mainPanel = new JPanel();

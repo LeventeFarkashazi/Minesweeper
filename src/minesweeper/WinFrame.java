@@ -4,19 +4,11 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-/**
- * A játék megnyerésekor megjelenő ablak.
- */
 public class WinFrame extends JFrame {
     private final Difficulty difficulty;
     private final int time;
     private String winnerName;
 
-    /**
-     * Konstruktor.
-     * Példányosítj az ablakot.
-     * Beállítja az ablak attribútumait és meghívja a komponenseket inicializáló függvényt.
-     */
     public WinFrame() {
         //set window properties
         super("You Win!");
@@ -35,9 +27,6 @@ public class WinFrame extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    /**
-     * Inicializálja a megjelenítendő paneleket.
-     */
     private void initComponents() {
         //content pane
         JPanel mainPanel = new JPanel();

@@ -8,17 +8,10 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A dicsőséglistát megjelenítő ablak.
- */
 public class HighScoresFrame extends JFrame {
     static JTable table;
     private final HighScoresData data;
 
-    /**
-     * Konstruktor.
-     * Példányosítja az ablakot, beállítja az attribútumait.
-     */
     public HighScoresFrame() {
         //set window properties
         super("High Scores");
@@ -35,9 +28,6 @@ public class HighScoresFrame extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    /**
-     * Inicializálja az ablak komponenseit.
-     */
     private void initComponents() {
         this.setLayout(new BorderLayout());
 
@@ -94,18 +84,9 @@ public class HighScoresFrame extends JFrame {
 
     }
 
-    /**
-     * A renderelésért felelős osztály.
-     */
     static class ScoreTableCellRenderer implements TableCellRenderer {
         private final TableCellRenderer renderer;
 
-        /**
-         * Konstruktor.
-         * Példányosítja a renderer-t.
-         *
-         * @param defRenderer az adott adattípus default renderer-je
-         */
         public ScoreTableCellRenderer(TableCellRenderer defRenderer) {
             //"fancy" rendering for the Enum class (uses String default renderer)
             if (defRenderer == table.getDefaultRenderer(Enum.class)) {

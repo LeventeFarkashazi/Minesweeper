@@ -1,9 +1,5 @@
 package minesweeper;
 
-/**
- * A játék logikáját megvalósító osztály.
- * Csak egy példánya lehet, azaz singleton.
- */
 public class GameLogic {
     private static GameLogic instance;
     private Grid grid;
@@ -15,12 +11,6 @@ public class GameLogic {
     private int bombs = 30;
     private Frame frame;
 
-    /**
-     * Visszadja az osztály egyetlen létező példányát.
-     * Ha az osztálynak még nem létezik példánya, létrehoz egyet.
-     *
-     * @return az osztály példánya
-     */
     public static GameLogic getInstance() {
         if (instance == null) {
             instance = new GameLogic();
@@ -28,9 +18,6 @@ public class GameLogic {
         return instance;
     }
 
-    /**
-     * Inicializálja  a játékot.
-     */
     void initGame() {
         gameStarted = false;
         Grid.getInstance().resetGrid();
@@ -42,12 +29,6 @@ public class GameLogic {
         frame = new Frame();
     }
 
-    /**
-     * Egy adott mezőre bal kattintást reprezentál. A mezőre kattintás következményeiért felelős.
-     *
-     * @param x a kattintott mező gridben elfoglalt helyének x koodinátája
-     * @param y a kattintott mező gridben elfoglalt helyének y koodinátája
-     */
     public void tileLeftClick(int x, int y) {
         //On the first click, starts the timer (and the game)
         if (!gameStarted) {
@@ -79,29 +60,14 @@ public class GameLogic {
         }
     }
 
-    /**
-     * Tile right click.
-     * Egy adott mezőre jobb kattintást reprezentál. A mezőre kattintás következményeiért felelős.
-     *
-     * @param x a kattintott mező gridben elfoglalt helyének x koodinátája
-     * @param y a kattintott mező gridben elfoglalt helyének y koodinátája
-     */
     public void tileRightClick(int x, int y) {
         grid.flag(x, y);
     }
 
-    /**
-     * Visszaadja, hogy felrobbant e az aknamező valamelyik bombája.
-     *
-     * @return felrobbant -e az aknamező
-     */
     public boolean isExploded() {
         return grid.isExploded();
     }
 
-    /**
-     * A játék elvesztése. Megállítja az időzítőt és felfedi az összes mezőt, majd megjeleníti a gameOver ablakot.
-     */
     void gameOver() {
         Timer.getInstance().stop();
         grid.revealAll();
@@ -109,78 +75,36 @@ public class GameLogic {
         gameOverFrame.setVisible(true);
     }
 
-    /**
-     * Beállítja a játék attribútumait.
-     *
-     * @param width  az aknamező szélessége
-     * @param height az aknamező magassága
-     * @param bombs  a bombák száma
-     */
     public void SetGameAttributes(int width, int height, int bombs) {
         this.width = width;
         this.height = height;
         this.bombs = bombs;
     }
 
-    /**
-     * Visszatér az aknamező szélességeével.
-     *
-     * @return a mező szélessége
-     */
     public int getWidth() {
         return width;
     }
 
-    /**
-     * Visszatér az aknamező magasságával.
-     *
-     * @return a mező magasságá
-     */
     public int getHeight() {
         return height;
     }
 
-    /**
-     * Visszatér az aknamezőn lévő bombák számával.
-     *
-     * @return a bombák száma
-     */
     public int getBombs() {
         return bombs;
     }
 
-    /**
-     * Visszatér az aknamező adatait tároló grid példányával.
-     *
-     * @return a grid példányával
-     */
     public Grid getGrid() {
         return grid;
     }
 
-    /**
-     * Visszatér a játékot megjelenítő ablak pédánnyal.
-     *
-     * @return a játékot megjelenítő ablak pédánny
-     */
     public Frame getFrame() {
         return frame;
     }
 
-    /**
-     * Visszatér a játék aktuális .
-     *
-     * @return the difficulty
-     */
     public Difficulty getDifficulty() {
         return difficulty;
     }
 
-    /**
-     * A játék nehézségét állítja be. Beállítja a megadott nehézséghez tartozó játék attribútumokat.
-     *
-     * @param difficulty a beállítani kívánt nehézség
-     */
     public void setDifficulty(Difficulty difficulty) {
         if (difficulty != null) {
             this.difficulty = difficulty;
@@ -196,11 +120,6 @@ public class GameLogic {
         }
     }
 
-    /**
-     * Is game started boolean.
-     *
-     * @return the boolean
-     */
     public boolean isGameStarted() {
         return gameStarted;
     }
